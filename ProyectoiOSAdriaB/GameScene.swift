@@ -14,13 +14,28 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    var logo :SKSpriteNode?
+    
     override func didMove(to view: SKView) {
+        if var logo = self.logo{
+            logo =  SKSpriteNode(imageNamed: "pica")
+            logo.position = CGPoint(x: view.center.x,y: view.center.y+100);
+            addChild(logo)
+        }
+        
         
         // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
+        
+        self.label = SKLabelNode(text:"holaaaa")
+        
+        //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+            //label.alpha = 0.0
+            addChild(label)
+            label.color = SKColor.white
+            label.position = view.center
+            
+            //label.run(SKAction.fadeIn(withDuration: 2.0))
         }
         
         // Create shape node to use during mouse interaction
@@ -64,7 +79,9 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+            let pulse = SKAction.sequence([ SKAction.scale(by: 0.5, duration: 0.3),  SKAction.scale(by: 2.0, duration: 0.3)])
+            label.run(pulse)
+            //label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
         }
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
@@ -85,5 +102,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        if let logo = self.logo{
+            //logo.position.x += 0.01
+            
+        }
+
     }
 }
