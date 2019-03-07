@@ -1,29 +1,23 @@
 //
-//  GameScene.swift
+//  MenuScene.swift
 //  ProyectoiOSAdriaB
 //
-//  Created by Adrià Biarnés Belso on 1/3/19.
+//  Created by Adrià Biarnés Belso on 7/3/19.
 //  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
 //
 
 import SpriteKit
 import GameplayKit
 
-
-class GameScene: SKScene {
+class MenuScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
-    private var gameButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
     
     var logo :SKSpriteNode?
     
     override func didMove(to view: SKView) {
-        print("start")
-        gameButton.fillColor = .red
-        gameButton.position = CGPoint(x: view.frame.width/3.0, y: view.frame.height / 3.0)
-        gameButton.isUserInteractionEnabled = true  //així activem els eventos
-        addChild(gameButton)
+        
         
         
         
@@ -36,7 +30,7 @@ class GameScene: SKScene {
         
         // Get label node from scene and store it for use later
         
-        self.label = SKLabelNode(text:"holaaaa")
+        self.label = SKLabelNode(text:"MenuScene")
         
         //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
@@ -64,7 +58,6 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        print("touch scne")
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
             n.strokeColor = SKColor.green
@@ -115,10 +108,10 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         
         //testing per provar d'anar movent el logo
-        /*if let logo = self.logo{
+        if let logo = self.logo{
             //logo.position.x += 0.01
             
-        }*/
-
+        }
+        
     }
 }
