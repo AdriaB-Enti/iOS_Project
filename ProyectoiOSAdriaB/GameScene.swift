@@ -10,11 +10,12 @@ import SpriteKit
 import GameplayKit
 
 
-class GameScene: SKScene {
+class GameScene: SKScene, ButtonDelegate {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var gameButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
+    private var settingsButton = Button(rect: CGRect(x: 0, y: 0, width: 100, height: 50), cornerRadius: 10)
     
     var logo :SKSpriteNode?
     
@@ -23,8 +24,14 @@ class GameScene: SKScene {
         gameButton.fillColor = .red
         gameButton.position = CGPoint(x: view.frame.width/3.0, y: view.frame.height / 3.0)
         gameButton.isUserInteractionEnabled = true  //així activem els eventos
+        gameButton.delegate = self
         addChild(gameButton)
         
+        settingsButton.fillColor = .blue
+        settingsButton.position = CGPoint(x: view.frame.width/2.0, y: view.frame.height / 8.0)
+        settingsButton.isUserInteractionEnabled = true  //així activem els eventos
+        settingsButton.delegate = self
+        addChild(settingsButton)
         
         
         if var logo = self.logo{
@@ -120,5 +127,12 @@ class GameScene: SKScene {
             
         }*/
 
+    }
+    
+    func onTap(sender: Button) {
+        
+        if (sender == gameButton) {
+            print("scene game button")
+        }
     }
 }
