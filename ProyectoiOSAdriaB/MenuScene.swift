@@ -9,16 +9,34 @@
 import SpriteKit
 import GameplayKit
 
-class MenuScene: SKScene {
+class MenuScene: SKScene, ButtonDelegate {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
     var logo :SKSpriteNode?
     
+    //MENU BUTTONS
+    private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
+    private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
+    //posar un about button? potser que sigui més petit, circular amb un interrogant
+    //i un help button
+    //afegir més animacions pel mig, que no quedi tant estatic
+    
     override func didMove(to view: SKView) {
         
+        //Button init
+        startButton.fillColor = .red
+        startButton.position = CGPoint(x: view.frame.width/2.0, y: view.frame.height / 2.0)
+        startButton.isUserInteractionEnabled = true  //així activem els eventos
+        startButton.delegate = self
+        addChild(startButton)
         
+        optionsButton.fillColor = .blue
+        optionsButton.position = CGPoint(x: view.frame.width/2.0, y: 3*view.frame.height / 4.0)
+        optionsButton.isUserInteractionEnabled = true  //així activem els eventos
+        optionsButton.delegate = self
+        addChild(optionsButton)
         
         
         if var logo = self.logo{
@@ -30,7 +48,7 @@ class MenuScene: SKScene {
         
         // Get label node from scene and store it for use later
         
-        self.label = SKLabelNode(text:"MenuScene")
+        self.label = SKLabelNode(text:"Main Menu")
         
         //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
@@ -113,5 +131,14 @@ class MenuScene: SKScene {
             
         }
         
+    }
+    
+    func onTap(sender: Button) {
+        if(sender == startButton){
+            
+        }
+        if(sender == optionsButton){
+            
+        }
     }
 }

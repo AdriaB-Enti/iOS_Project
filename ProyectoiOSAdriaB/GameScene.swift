@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 
 
+
 class GameScene: SKScene, ButtonDelegate {
     
     private var label : SKLabelNode?
@@ -43,7 +44,7 @@ class GameScene: SKScene, ButtonDelegate {
         
         // Get label node from scene and store it for use later
         
-        self.label = SKLabelNode(text:"holaaaa")
+        self.label = SKLabelNode(text:"test scene")
         
         //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
