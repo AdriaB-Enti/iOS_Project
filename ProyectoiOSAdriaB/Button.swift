@@ -17,37 +17,45 @@ class Button: SKShapeNode{
     weak var delegate: ButtonDelegate?
     private var textLabel : SKLabelNode = SKLabelNode()
     var startColor : SKColor?
-    var highlightColor : SKColor?
+    var highlightColor : SKColor = SKColor.white
     
     
     
     func setText(text: String) {
         //detectar si el parent és null
-        //if(textLabel.parent.null){
+        if(textLabel.parent == nil){
+            addChild(textLabel)
+            textLabel.fontName = "HeroesLegend"
             textLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             textLabel.position = CGPoint(x: frame.width/2.0, y: frame.height/2.0)
-        //}
+        }
         textLabel.text = text
+        
+    }
+    
+    func setTextColor(color : UIColor){
+        textLabel.fontColor = color
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //animar per fer un escalat i ferlo més petit
-        //fer que canvii de color tamé?
-        //fer servir el highlight color per quan comences a fer touch
-        if let highlightColor = self.highlightColor {
-            self.fillColor = highlightColor;
-        }
+        let action = SKAction.scale(by: 0.9, duration: 0.1)
+        run(action)
+        //if let highlightColor = self.highlightColor {
+            self.startColor = self.fillColor
+            self.fillColor = self.highlightColor;
+        //}
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //animarlo per fer un escalat i ferlo més gran (potser també mirar si el dit segueix estant al boto o si l'hem mogut)
-        //tornarlo a deixar amb el color d'abans?
-        //treure el highlightColor i posar el startColor
-        
-        if let highlightColor = self.highlightColor {
-            self.fillColor = highlightColor;
-        }
+        let action = SKAction.scale(by: 1.0/0.9, duration: 0.1)
+        run(action)
+        //if let highlightColor = self.highlightColor {
+            if let startColor = self.startColor {
+                self.fillColor = startColor;
+            }
+        //}
         
         
         //check if the user still has the finger inside the button

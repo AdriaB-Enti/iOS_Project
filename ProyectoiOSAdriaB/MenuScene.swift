@@ -17,39 +17,50 @@ class MenuScene: SKScene, ButtonDelegate {
     var logo :SKSpriteNode?
     
     //MENU BUTTONS
-    private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
-    private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
+    private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 300, height: 100), cornerRadius: 10)
+    
+    private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
     //posar un about button? potser que sigui més petit, circular amb un interrogant
     //i un help button
     //afegir més animacions pel mig, que no quedi tant estatic
-    
+
     override func didMove(to view: SKView) {
         
+        self.backgroundColor = UIColor(named: "myBlue")!
+        
+        
         //Button init
-        startButton.fillColor = .red
-        startButton.position = CGPoint(x: view.frame.width/2.0, y: view.frame.height / 2.0)
+        startButton.fillColor = UIColor(named: "myOrange")!
+        startButton.position = CGPoint(x: (view.frame.width/2.0) - startButton.frame.width/2.0, y: (view.frame.height / 3.0) - startButton.frame.height/2.0)
         startButton.isUserInteractionEnabled = true  //així activem els eventos
         startButton.delegate = self
+        startButton.setText(text: "Play")
+        startButton.setTextColor(color: .black)
         addChild(startButton)
         
-        optionsButton.fillColor = .blue
-        optionsButton.position = CGPoint(x: view.frame.width/2.0, y: 3*view.frame.height / 4.0)
+        optionsButton.fillColor = UIColor(named: "myGray")!
+        optionsButton.position = CGPoint(x: (8.75*view.frame.width/10.0) - optionsButton.frame.width/2.0, y: (9.5*view.frame.height / 10.0) - optionsButton.frame.height/2.0)
         optionsButton.isUserInteractionEnabled = true  //així activem els eventos
         optionsButton.delegate = self
+        optionsButton.setText(text: "Op")
+        startButton.setTextColor(color: .black)
         addChild(optionsButton)
         
         
         if var logo = self.logo{
             logo =  SKSpriteNode(imageNamed: "pica")
-            logo.position = CGPoint(x: view.center.x,y: view.center.y+100);
+            logo.position = CGPoint(x: view.frame.width/2,y: view.frame.height/2)
             addChild(logo)
         }
         
+        /*let logotest = SKSpriteNode(imageNamed: "pica")
+        logotest.position = CGPoint(x: view.frame.width/2,y: view.frame.height/2)
+        addChild(logotest)*/
         
         // Get label node from scene and store it for use later
         
         self.label = SKLabelNode(text:"Main Menu")
-        
+                
         //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
             //label.alpha = 0.0
@@ -125,17 +136,18 @@ class MenuScene: SKScene, ButtonDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
-        //testing per provar d'anar movent el logo
-        if let logo = self.logo{
-            //logo.position.x += 0.01
-            
-        }
         
     }
     
     func onTap(sender: Button) {
         if(sender == startButton){
-            
+            if let view = self.view as! SKView? {
+                let scene = MenuScene(size: view.frame.size)
+                
+                //scene.menudelegate = self
+                //scene.scalemode = .aspectFill
+            }
+
         }
         if(sender == optionsButton){
             
