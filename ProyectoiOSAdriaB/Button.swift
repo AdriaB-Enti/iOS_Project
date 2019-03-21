@@ -15,7 +15,7 @@ protocol ButtonDelegate: class {
 class Button: SKShapeNode{
     
     weak var delegate: ButtonDelegate?
-    private var textLabel : SKLabelNode = SKLabelNode()
+    private var textLabel : SKLabelNode = SKLabelNode(fontNamed: "HeroesLegend")
     var startColor : SKColor?
     var highlightColor : SKColor = SKColor.white
     
@@ -25,7 +25,7 @@ class Button: SKShapeNode{
         //detectar si el parent és null
         if(textLabel.parent == nil){
             addChild(textLabel)
-            textLabel.fontName = "HeroesLegend"
+            //textLabel.fontName = "HeroesLegend"
             textLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             textLabel.position = CGPoint(x: frame.width/2.0, y: frame.height/2.0)
         }

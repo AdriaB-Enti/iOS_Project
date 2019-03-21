@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		620D9512223A9C430073484A /* HeroesLegend.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 620D9511223A9C430073484A /* HeroesLegend.ttf */; };
+		6214918F2243CEF10000F0DE /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6214918E2243CEF10000F0DE /* GameLogic.swift */; };
+		621491912243CF370000F0DE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621491902243CF370000F0DE /* Card.swift */; };
+		621491932243DAC00000F0DE /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621491922243DAC00000F0DE /* CardSprite.swift */; };
+		6295D534223BD61000E9AE81 /* Heroes Legend Hollow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6295D533223BD61000E9AE81 /* Heroes Legend Hollow.ttf */; };
+		6295D535223BD73600E9AE81 /* HeroesLegend.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6295D532223BD4A500E9AE81 /* HeroesLegend.ttf */; };
+		6295D537223BD89500E9AE81 /* AboutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6295D536223BD89500E9AE81 /* AboutScene.swift */; };
 		62E0322522296E290021BD63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0322422296E290021BD63 /* AppDelegate.swift */; };
 		62E0322722296E290021BD63 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 62E0322622296E290021BD63 /* GameScene.sks */; };
 		62E0322922296E2A0021BD63 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 62E0322822296E2A0021BD63 /* Actions.sks */; };
@@ -21,7 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		620D9511223A9C430073484A /* HeroesLegend.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = HeroesLegend.ttf; path = ../../../Downloads/heroes_legend/HeroesLegend.ttf; sourceTree = "<group>"; };
+		6214918E2243CEF10000F0DE /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		621491902243CF370000F0DE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		621491922243DAC00000F0DE /* CardSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
+		6295D532223BD4A500E9AE81 /* HeroesLegend.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HeroesLegend.ttf; sourceTree = "<group>"; };
+		6295D533223BD61000E9AE81 /* Heroes Legend Hollow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heroes Legend Hollow.ttf"; sourceTree = "<group>"; };
+		6295D536223BD89500E9AE81 /* AboutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScene.swift; sourceTree = "<group>"; };
 		62E0322122296E290021BD63 /* ProyectoiOSAdriaB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoiOSAdriaB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E0322422296E290021BD63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E0322622296E290021BD63 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -50,9 +60,9 @@
 		62E0321822296E290021BD63 = {
 			isa = PBXGroup;
 			children = (
+				6295D533223BD61000E9AE81 /* Heroes Legend Hollow.ttf */,
 				62E0322322296E290021BD63 /* ProyectoiOSAdriaB */,
 				62E0322222296E290021BD63 /* Products */,
-				620D9511223A9C430073484A /* HeroesLegend.ttf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +77,7 @@
 		62E0322322296E290021BD63 /* ProyectoiOSAdriaB */ = {
 			isa = PBXGroup;
 			children = (
+				6295D532223BD4A500E9AE81 /* HeroesLegend.ttf */,
 				62E0322422296E290021BD63 /* AppDelegate.swift */,
 				62E0322622296E290021BD63 /* GameScene.sks */,
 				62E0322822296E2A0021BD63 /* Actions.sks */,
@@ -78,6 +89,10 @@
 				62E0323622296E2D0021BD63 /* Info.plist */,
 				62E4313422314A060007D61C /* MenuScene.swift */,
 				62E4313622314E590007D61C /* Button.swift */,
+				6295D536223BD89500E9AE81 /* AboutScene.swift */,
+				6214918E2243CEF10000F0DE /* GameLogic.swift */,
+				621491902243CF370000F0DE /* Card.swift */,
+				621491922243DAC00000F0DE /* CardSprite.swift */,
 			);
 			path = ProyectoiOSAdriaB;
 			sourceTree = "<group>";
@@ -140,9 +155,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6295D534223BD61000E9AE81 /* Heroes Legend Hollow.ttf in Resources */,
 				62E0323022296E2A0021BD63 /* Main.storyboard in Resources */,
+				6295D535223BD73600E9AE81 /* HeroesLegend.ttf in Resources */,
 				62E0322722296E290021BD63 /* GameScene.sks in Resources */,
-				620D9512223A9C430073484A /* HeroesLegend.ttf in Resources */,
 				62E0323222296E2D0021BD63 /* Assets.xcassets in Resources */,
 				62E0323522296E2D0021BD63 /* LaunchScreen.storyboard in Resources */,
 				62E0322922296E2A0021BD63 /* Actions.sks in Resources */,
@@ -158,9 +174,13 @@
 			files = (
 				62E4313722314E590007D61C /* Button.swift in Sources */,
 				62E0322B22296E2A0021BD63 /* GameScene.swift in Sources */,
+				6295D537223BD89500E9AE81 /* AboutScene.swift in Sources */,
+				621491932243DAC00000F0DE /* CardSprite.swift in Sources */,
 				62E4313522314A060007D61C /* MenuScene.swift in Sources */,
 				62E0322D22296E2A0021BD63 /* GameViewController.swift in Sources */,
 				62E0322522296E290021BD63 /* AppDelegate.swift in Sources */,
+				6214918F2243CEF10000F0DE /* GameLogic.swift in Sources */,
+				621491912243CF370000F0DE /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

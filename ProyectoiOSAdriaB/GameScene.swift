@@ -17,6 +17,7 @@ class GameScene: SKScene, ButtonDelegate {
     private var spinnyNode : SKShapeNode?
     private var gameButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
     private var settingsButton = Button(rect: CGRect(x: 0, y: 0, width: 100, height: 50), cornerRadius: 10)
+    private var gameLogic = GameLogic()
     
     var logo :SKSpriteNode?
     
