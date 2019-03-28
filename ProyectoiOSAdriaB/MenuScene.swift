@@ -33,7 +33,6 @@ class MenuScene: SKScene, ButtonDelegate {
     override func didMove(to view: SKView) {
         
         self.backgroundColor = UIColor(named: "myBlue")!
-        
         //Button init
         startButton.fillColor = UIColor(named: "myOrange")!
         startButton.position = CGPoint(x: (view.frame.width/2.0) - startButton.frame.width/2.0, y: (1.1*view.frame.height / 3.0) - startButton.frame.height/2.0)

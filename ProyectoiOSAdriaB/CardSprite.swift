@@ -6,8 +6,12 @@
 //  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
 //
 
-import Foundation
 
-class CardSprite{
+import SpriteKit
+
+class CardSprite : SKSpriteNode{
+    //afegir un Card
+    var cardID: Int?
+    
     
 }

@@ -8,15 +8,20 @@
 
 import Foundation
 
+enum CardState: Int {
+    case facingDown
+    case facingUp
+    case matched
+}
+
 class Card{
     var id = 0
     var textureFront = ""
     var textureBack = "backTexture"
+    var state = CardState.facingDown
     
     init(_ id:Int, _ textureFront:String){
         self.id = id
         self.textureFront = textureFront
     }
-    
-    
 }

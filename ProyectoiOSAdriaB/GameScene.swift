@@ -15,25 +15,13 @@ class GameScene: SKScene, ButtonDelegate {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
-    private var gameButton = Button(rect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 10)
-    private var settingsButton = Button(rect: CGRect(x: 0, y: 0, width: 100, height: 50), cornerRadius: 10)
     private var gameLogic = GameLogic()
+    private var cardSprites = [CardSprite]()
     
     var logo :SKSpriteNode?
     
     override func didMove(to view: SKView) {
         print("start")
-        gameButton.fillColor = .red
-        gameButton.position = CGPoint(x: view.frame.width/3.0, y: view.frame.height / 3.0)
-        gameButton.isUserInteractionEnabled = true  //així activem els eventos
-        gameButton.delegate = self
-        addChild(gameButton)
-        
-        settingsButton.fillColor = .blue
-        settingsButton.position = CGPoint(x: view.frame.width/2.0, y: view.frame.height / 8.0)
-        settingsButton.isUserInteractionEnabled = true  //així activem els eventos
-        settingsButton.delegate = self
-        addChild(settingsButton)
         
         
         if var logo = self.logo{
@@ -68,6 +56,30 @@ class GameScene: SKScene, ButtonDelegate {
             spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
+        }
+        
+        
+        gameLogic.start()
+        for card in gameLogic.cards{
+            print("textureName "+card.textureFront)
+            
+            let test = SKSpriteNode(fileNamed:"aCard.png")
+            if let testo = test {
+                testo.position = CGPoint(x: view.frame.width / 2.0, y: view.frame.height - 100)
+                addChild(testo)
+                print("this doesn't fucking work")
+            }
+            /*
+            var newCard = CardSprite(fileNamed:card.textureFront)
+            newCard?.cardID = card.id
+            
+            //position at the right place
+            
+            
+            cardSprites.append(newCard!)
+            addChild(newCard!)
+ 
+ */
         }
     }
     
@@ -133,8 +145,8 @@ class GameScene: SKScene, ButtonDelegate {
     
     func onTap(sender: Button) {
         
-        if (sender == gameButton) {
+        /*if (sender == gameButton) {
             print("scene game button")
-        }
+        }*/
     }
 }
