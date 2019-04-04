@@ -17,37 +17,28 @@ class GameScene: SKScene, ButtonDelegate {
     private var spinnyNode : SKShapeNode?
     private var gameLogic = GameLogic()
     private var cardSprites = [CardSprite]()
+    private var cardTests = [CardSprite]()
     
-    var logo :SKSpriteNode?
+    //var atestCard :SKSpriteNode?
     
     override func didMove(to view: SKView) {
         print("start")
         
-        
-        if var logo = self.logo{
-            logo =  SKSpriteNode(imageNamed: "pica")
-            logo.position = CGPoint(x: view.center.x,y: view.center.y+100);
-            addChild(logo)
-        }
-        
-        
-        // Get label node from scene and store it for use later
-        
+        /*
         self.label = SKLabelNode(text:"test scene")
-        
-        //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
             //label.alpha = 0.0
             addChild(label)
             label.color = SKColor.white
             label.position = view.center
-            
             //label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        }*/
         
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        
+        
+        /*self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
@@ -56,31 +47,44 @@ class GameScene: SKScene, ButtonDelegate {
             spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
-        }
+        }*/
         
         
         gameLogic.start()
-        for card in gameLogic.cards{
-            print("textureName "+card.textureFront)
-            
-            let test = SKSpriteNode(fileNamed:"aCard.png")
-            if let testo = test {
-                testo.position = CGPoint(x: view.frame.width / 2.0, y: view.frame.height - 100)
-                addChild(testo)
-                print("this doesn't fucking work")
+        
+        var cardCount = 0
+        let TOTAL_ROWS = 2
+        var totalCols = gameLogic.cards.count / TOTAL_ROWS
+        
+        for row in 0...TOTAL_ROWS-1{
+            for col in 0...totalCols-1{
+                let card = gameLogic.cards[cardCount]
+                print("textureName " + card.textureFront)
+                let aCard = CardSprite(imageNamed: card.textureFront)
+                aCard.cardID = cardCount
+                //position cards based on number of cards
+                let cardWidth = 200.0
+                let separation = (Double(view.frame.width) / Double(gameLogic.cards.count)) - (cardWidth / 2.0)
+                
+                //TODO posicionar bé
+                //aCard.position = CGPoint(x: Double(col * 20), y: Double(row * 200))
+                aCard.position = CGPoint(x: separation + cardWidth/2.0 + Double(col) * (separation+cardWidth), y: Double(view.frame.height) / 4.0 + Double(row) * Double(view.frame.height) / 3.0)
+                aCard.scale(to: CGSize(width: 200, height: 300))
+                cardSprites.append(aCard)
+                
+                addChild(cardSprites.last!)
+                
+                
+                cardCount += 1
             }
-            /*
-            var newCard = CardSprite(fileNamed:card.textureFront)
-            newCard?.cardID = card.id
-            
-            //position at the right place
-            
-            
-            cardSprites.append(newCard!)
-            addChild(newCard!)
- 
- */
         }
+        
+        
+        
+        var atestCard = CardSprite(imageNamed: "aCard")
+        atestCard.position = CGPoint(x: 120, y: 120)
+        cardTests.append(atestCard)
+        //addChild(cardTests.last!)
     }
     
     
@@ -144,6 +148,8 @@ class GameScene: SKScene, ButtonDelegate {
     }
     
     func onTap(sender: Button) {
+        //TODO fer un for i mirar quina de les cartes es
+        //cridar el gameLogic i el metode que toca (selectedCard)
         
         /*if (sender == gameButton) {
             print("scene game button")

@@ -20,7 +20,6 @@ class Button: SKShapeNode{
     var highlightColor : SKColor = SKColor.white
     
     
-    
     func setText(text: String) {
         //detectar si el parent és null
         if(textLabel.parent == nil){

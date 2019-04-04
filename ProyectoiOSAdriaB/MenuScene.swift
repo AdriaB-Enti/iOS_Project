@@ -58,11 +58,11 @@ class MenuScene: SKScene, ButtonDelegate {
         aboutButton.delegate = self
         addChild(aboutButton)
         
+        /*logo =  SKSpriteNode(imageNamed: "testicon")
         if var logo = self.logo{
-            logo =  SKSpriteNode(imageNamed: "pica")
             logo.position = CGPoint(x: view.frame.width/2,y: view.frame.height/2)
             addChild(logo)
-        }
+        }*/
         
         // Get label node from scene and store it for use later
         

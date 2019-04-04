@@ -23,7 +23,7 @@ class GameLogic {
     var selectedCard: Card? //the card we have currently selected
     var gameFinished = false
     
-    let textureNames = ["pica","pica","pica","pica","pica","pica","pica","pica"]
+let textureNames = ["aCard","aCard","aCard","aCard","aCard","aCard","aCard","aCard"] //testing
     //let textureNames = ["testA","testB","testC","testD","testE","testF","testG","testH"]
     
     var level = Level.easy
@@ -44,6 +44,16 @@ class GameLogic {
         cards.shuffle() //put all cards in a random order
         
         //place them in the scene?
+        
+        //DEBUG
+        print("cards are")
+        for card in cards{
+            print("card "+card.textureFront)
+            
+        }
+        selectCard(cardInd: 0)
+        selectCard(cardInd: 1)
+        
     }
     
     init(){
@@ -73,7 +83,7 @@ class GameLogic {
                 
             }
         }
-        
+        checkGameFinishied()
     }
     
     func checkGameFinishied(){
@@ -85,7 +95,5 @@ class GameLogic {
             //TODO: show victory message screen or something
         }
     }
-    
-    
     
 }
