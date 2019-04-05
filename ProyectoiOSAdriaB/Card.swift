@@ -16,12 +16,17 @@ enum CardState: Int {
 
 class Card{
     var id = 0
+    var pairId = 0
     var textureFront = ""
-    var textureBack = "backTexture"
+    var textureBack = "aCard"
     var state = CardState.facingDown
     
-    init(_ id:Int, _ textureFront:String){
+    init(_ id:Int, _ pairId:Int, _ textureFront:String){
         self.id = id
+        self.pairId = pairId
         self.textureFront = textureFront
+    }
+    init(){
+        
     }
 }

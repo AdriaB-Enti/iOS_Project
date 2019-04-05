@@ -11,13 +11,12 @@ import GameplayKit
 
 
 
-class GameScene: SKScene, ButtonDelegate {
-    
+class GameScene: SKScene, CardDelegate, GameLogicDelegate {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var gameLogic = GameLogic()
     private var cardSprites = [CardSprite]()
-    private var cardTests = [CardSprite]()
+    private var cardtest = CardSprite()
     
     //var atestCard :SKSpriteNode?
     
@@ -39,7 +38,6 @@ class GameScene: SKScene, ButtonDelegate {
         
         
         /*self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
             
@@ -51,6 +49,7 @@ class GameScene: SKScene, ButtonDelegate {
         
         
         gameLogic.start()
+        gameLogic.delegate = self
         
         var cardCount = 0
         let TOTAL_ROWS = 2
@@ -58,10 +57,12 @@ class GameScene: SKScene, ButtonDelegate {
         
         for row in 0...TOTAL_ROWS-1{
             for col in 0...totalCols-1{
-                let card = gameLogic.cards[cardCount]
+                let card = gameLogic.cards[col + row * totalCols]
                 print("textureName " + card.textureFront)
-                let aCard = CardSprite(imageNamed: card.textureFront)
-                aCard.cardID = cardCount
+                let aCard = CardSprite(imageNamed: card.textureBack)
+                aCard.cardID = card.id
+                aCard.isUserInteractionEnabled = true
+                aCard.delegate = self
                 //position cards based on number of cards
                 let cardWidth = 200.0
                 let separation = (Double(view.frame.width) / Double(gameLogic.cards.count)) - (cardWidth / 2.0)
@@ -73,53 +74,23 @@ class GameScene: SKScene, ButtonDelegate {
                 cardSprites.append(aCard)
                 
                 addChild(cardSprites.last!)
-                
-                
                 cardCount += 1
             }
         }
-        
-        
-        
-        var atestCard = CardSprite(imageNamed: "aCard")
-        atestCard.position = CGPoint(x: 120, y: 120)
-        cardTests.append(atestCard)
-        //addChild(cardTests.last!)
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
         print("touch scne")
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            let pulse = SKAction.sequence([ SKAction.scale(by: 0.5, duration: 0.3),  SKAction.scale(by: 2.0, duration: 0.3)])
-            label.run(pulse)
-            //label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
@@ -147,12 +118,59 @@ class GameScene: SKScene, ButtonDelegate {
 
     }
     
-    func onTap(sender: Button) {
-        //TODO fer un for i mirar quina de les cartes es
-        //cridar el gameLogic i el metode que toca (selectedCard)
+    func onTap(sender: CardSprite) {
         
-        /*if (sender == gameButton) {
-            print("scene game button")
-        }*/
+        
+        
+        
+        gameLogic.selectCard(cardInd: sender.cardID)
+        print("card \(sender.cardID)pressed")
+    }
+    
+    func cardUntapped(idCard: Int) {
+        print("untapping\(idCard)")
+        for cardSp in cardSprites{
+            if(cardSp.cardID  == idCard){
+                //animacio de carta girada
+                
+                var originalXscale = cardSp.xScale
+                
+                let pulse = SKAction.sequence([ SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                cardSp.run(pulse)
+                //sender.texture = SKTexture(imageNamed:  "aCard")
+                //wait 0.7
+                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.setTexture(SKTexture(imageNamed:  "aCard")),
+                                                SKAction.scaleX(to: originalXscale, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                
+                cardSp.run(pulse2)
+            }
+        }
+    }
+    
+    func gameFinished() {
+        print("gameFinished")
+    }
+    
+    func cardTapped(idCard: Int, newTexture:String) {
+        for cardSp in cardSprites{
+            if(cardSp.cardID  == idCard){
+                //animacio de carta girada
+                
+                var originalXscale = cardSp.xScale
+                
+                let pulse = SKAction.sequence([ SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                cardSp.run(pulse)
+                //sender.texture = SKTexture(imageNamed:  "aCard")
+                //wait 0.7
+                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.setTexture(SKTexture(imageNamed:  newTexture)),
+                                                SKAction.scaleX(to: originalXscale, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                
+                cardSp.run(pulse2)
+            }
+        }
+        
+        
+        
+        print("cardTapped")
     }
 }

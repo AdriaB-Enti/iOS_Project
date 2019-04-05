@@ -55,7 +55,6 @@ class MenuScene: SKScene, ButtonDelegate {
         aboutButton.delegate = self
         aboutButton.setText(text: "About")
         aboutButton.setTextColor(color: .black)
-        aboutButton.delegate = self
         addChild(aboutButton)
         
         /*logo =  SKSpriteNode(imageNamed: "testicon")
@@ -95,8 +94,6 @@ class MenuScene: SKScene, ButtonDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
@@ -120,9 +117,9 @@ class MenuScene: SKScene, ButtonDelegate {
     }
     
     func onTap(sender: Button) {
+        print("WHY")
         if(sender == startButton){
             menuDelegate?.goToGame(sender: self)
-            
         }
         if(sender == optionsButton){
             
