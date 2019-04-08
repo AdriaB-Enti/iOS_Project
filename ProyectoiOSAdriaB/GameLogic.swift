@@ -9,9 +9,9 @@
 import Foundation
 
 enum Level: Int {
-    case easy = 4
-    case medium = 8
-    case hard = 16  //test values
+    case easy = 12
+    case medium = 20
+    case hard = 30  //test values
     func getNumberOfCards() -> Int {
         return self.rawValue
     }
@@ -21,24 +21,29 @@ protocol GameLogicDelegate: class {
     func cardUntapped(idCard:Int)       //la tornem a deixar a l'estat origina (sense veure la imatge)
     func cardTapped(idCard:Int, newTexture:String)         //girada per primer cop
     func gameFinished()
+    func pointsAdded(totalPoints:Int)
 }
 
 class GameLogic {
     var delegate: GameLogicDelegate?
     var cards = [Card]()
+    
     var points = 0
+    var currentStreak = 0
     var selectedCard: Card? //the card we have currently selected
     var gameFinished = false
     
-    let textureNames = ["card1","card2","card3","card4","card1","card2","card3","card4"] //testing
+    let MATCH_REWARD = 2
+    
+    let textureNames = ["Card0","Card1","Card2","Card3","Card4","Card5","Card6","Card7","Card8","Card9","Card10","Card11","Card12","Card13","Card14"] //testing
     //let textureNames = ["testA","testB","testC","testD","testE","testF","testG","testH"]
     
     var level = Level.easy
     
-    func start(){
+    func start(startdifficulty:Level){
         
-        let texturesShuffled = textureNames.shuffled()
-        let currentTextures = texturesShuffled.prefix(upTo: level.getNumberOfCards()/2) //We divide in 2 because each card will have an identical match
+        level = startdifficulty
+        let currentTextures = textureNames.prefix(upTo: level.getNumberOfCards()/2) //We divide in 2 because each card will have an identical match
         
         //make a duplicate for each card
         var cardId = 0
@@ -71,13 +76,15 @@ class GameLogic {
             if let selected_card = self.selectedCard{
                 //it's a match!
                 if(selectedCard?.pairId == currentCard.id){
-                    points += 1
                     currentCard.state = CardState.matched
                     selected_card.state = CardState.matched
+                    score()
                 } else{
                     currentCard.state = CardState.facingDown
                     selected_card.state = CardState.facingDown
                     delegate?.cardUntapped(idCard: currentCard.id)
+                    
+                    currentStreak = 0
                 }
                 self.selectedCard = nil
                 
@@ -90,6 +97,11 @@ class GameLogic {
         checkGameFinishied()
     }
     
+    func pointsEarned(gainedPoints:Int){
+        points += gainedPoints
+        //call points label delegate
+    }
+    
     func checkGameFinishied(){
         for card in cards{
             if(card.state != CardState.matched){
@@ -98,6 +110,16 @@ class GameLogic {
             gameFinished = true
             //TODO: show victory message screen or something
         }
+    }
+
+    //we scored some points
+    func score(){
+        if(currentStreak > 0){
+            currentStreak += 1
+            points += currentStreak * MATCH_REWARD
+            pointsEarned(gainedPoints: points)
+        }
+        
     }
     
     func getCard(id:Int) -> Card{

@@ -18,7 +18,7 @@ class Card{
     var id = 0
     var pairId = 0
     var textureFront = ""
-    var textureBack = "aCard"
+    var textureBack = "CardBack"
     var state = CardState.facingDown
     
     init(_ id:Int, _ pairId:Int, _ textureFront:String){

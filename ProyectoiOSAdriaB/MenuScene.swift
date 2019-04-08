@@ -27,7 +27,7 @@ class MenuScene: SKScene, ButtonDelegate {
     
     private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
 
-    private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 240, height: 90), cornerRadius: 15)
+    private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 230, height: 80), cornerRadius: 15)
 
     
     override func didMove(to view: SKView) {
@@ -35,7 +35,7 @@ class MenuScene: SKScene, ButtonDelegate {
         self.backgroundColor = UIColor(named: "myBlue")!
         //Button init
         startButton.fillColor = UIColor(named: "myOrange")!
-        startButton.position = CGPoint(x: (view.frame.width/2.0) - startButton.frame.width/2.0, y: (1.1*view.frame.height / 3.0) - startButton.frame.height/2.0)
+        startButton.position = CGPoint(x: (view.frame.width/2.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
         startButton.isUserInteractionEnabled = true  //activate events
         startButton.delegate = self
         startButton.setText(text: "Play")
@@ -50,7 +50,7 @@ class MenuScene: SKScene, ButtonDelegate {
         addChild(optionsButton)
         
         aboutButton.fillColor = UIColor(named: "myOrange")!
-        aboutButton.position = CGPoint(x: (view.frame.width/2.0) - aboutButton.frame.width/2.0, y: (view.frame.height / 5.0) - aboutButton.frame.height/2.0)
+        aboutButton.position = CGPoint(x: (view.frame.width/2.0) - aboutButton.frame.width/2.0, y: (view.frame.height / 5.5) - aboutButton.frame.height/2.0)
         aboutButton.isUserInteractionEnabled = true
         aboutButton.delegate = self
         aboutButton.setText(text: "About")
@@ -74,8 +74,8 @@ class MenuScene: SKScene, ButtonDelegate {
             label.fontName = "HeroesLegend"
             label.fontColor = UIColor(named: "SecondOrange")!
             
-            label.fontSize = 29
-            label.position = CGPoint(x: view.frame.width/2.0, y: 4.5 * view.frame.height / 7.0)
+            label.fontSize = 35
+            label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
         }
         
     }

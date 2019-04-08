@@ -12,17 +12,22 @@ import GameplayKit
 
 
 class GameScene: SKScene, CardDelegate, GameLogicDelegate {
-    private var label : SKLabelNode?
+    private var labelTime : SKLabelNode?
+    private var labelPoints : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var gameLogic = GameLogic()
     private var cardSprites = [CardSprite]()
     private var cardtest = CardSprite()
+    private var mainMenuB:Button?
     
+    var cardWidth = 96.0
+    var cardHeight = 117.0
     //var atestCard :SKSpriteNode?
     
     override func didMove(to view: SKView) {
         print("start")
-        
+        print("width is \(view.frame.width)")
+        print("height is \(view.frame.height)")
         /*
         self.label = SKLabelNode(text:"test scene")
         if let label = self.label {
@@ -34,8 +39,23 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate {
         }*/
         
         // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
+        mainMenuB = Button(rect: CGRect(x: 35, y: Double(view.frame.height)*0.9, width: 40, height: 40), cornerRadius: 15)
+        if let menuB = mainMenuB{
+            menuB.fillColor = UIColor(named: "myOrange")!
+            addChild(menuB)
+        }
         
+        labelTime = SKLabelNode(text: "0:0")
+        labelTime?.position = CGPoint(x: Double(view.frame.width)*0.95, y: Double(view.frame.height)*0.9)
+        if let time = labelTime{
+            addChild(time)
+        }
+        
+        labelPoints = SKLabelNode(text: "Score: 0")
+        labelPoints?.position = CGPoint(x: Double(view.frame.width)*0.70, y: Double(view.frame.height)*0.9)
+        if let points = labelPoints{
+            addChild(points)
+        }
         
         /*self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         if let spinnyNode = self.spinnyNode {
@@ -48,12 +68,17 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate {
         }*/
         
         
-        gameLogic.start()
+        gameLogic.start(startdifficulty: Level.easy)
         gameLogic.delegate = self
         
-        var cardCount = 0
-        let TOTAL_ROWS = 2
-        var totalCols = gameLogic.cards.count / TOTAL_ROWS
+        let TOTAL_ROWS = 3
+        let totalCols = gameLogic.cards.count / TOTAL_ROWS
+        
+        let x_separation = (Double(view.frame.width) / Double(1 + (totalCols)))
+        let y_separation = (Double(view.frame.height) / Double(1 + (TOTAL_ROWS)))
+        let y_offset = -10.0
+        print("totalcols\(totalCols) ")
+        print("separation \(Double(1 + (totalCols)))")
         
         for row in 0...TOTAL_ROWS-1{
             for col in 0...totalCols-1{
@@ -64,17 +89,17 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate {
                 aCard.isUserInteractionEnabled = true
                 aCard.delegate = self
                 //position cards based on number of cards
-                let cardWidth = 200.0
-                let separation = (Double(view.frame.width) / Double(gameLogic.cards.count)) - (cardWidth / 2.0)
+                //let separation = (Double(view.frame.width) / Double(gameLogic.cards.count)) - (cardWidth / 2.0)
+                
                 
                 //TODO posicionar bé
                 //aCard.position = CGPoint(x: Double(col * 20), y: Double(row * 200))
-                aCard.position = CGPoint(x: separation + cardWidth/2.0 + Double(col) * (separation+cardWidth), y: Double(view.frame.height) / 4.0 + Double(row) * Double(view.frame.height) / 3.0)
-                aCard.scale(to: CGSize(width: 200, height: 300))
+                //aCard.position = CGPoint(x: separation + cardWidth/2.0 + Double(col) * (separation+cardWidth), y: Double(view.frame.height) / 4.0 + Double(row) * Double(view.frame.height) / 3.0)
+                aCard.position = CGPoint(x: x_separation * Double(col+1), y: (Double(1+row) * y_separation) + y_offset)
+                aCard.scale(to: CGSize(width: cardWidth, height: cardHeight))
                 cardSprites.append(aCard)
                 
                 addChild(cardSprites.last!)
-                cardCount += 1
             }
         }
     }
@@ -139,10 +164,11 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate {
                 cardSp.run(pulse)
                 //sender.texture = SKTexture(imageNamed:  "aCard")
                 //wait 0.7
-                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.setTexture(SKTexture(imageNamed:  "aCard")),
+                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.setTexture(SKTexture(imageNamed:  "CardBack")),
                                                 SKAction.scaleX(to: originalXscale, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
                 
                 cardSp.run(pulse2)
+                print("untap")
             }
         }
     }
@@ -172,5 +198,12 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate {
         
         
         print("cardTapped")
+    }
+    
+    func pointsAdded(totalPoints:Int) {
+        //canviar el text de la labe de points amb els nous
+        labelPoints?.text = "Score: \(totalPoints)"
+        
+        
     }
 }
