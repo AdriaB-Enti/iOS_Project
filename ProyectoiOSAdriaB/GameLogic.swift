@@ -30,7 +30,7 @@ class GameLogic {
     
     var points = 0
     var currentStreak = 0
-    var selectedCard: Card? //the card we have currently selected
+    var previousSelectedCard: Card? //the card we have currently selected
     var gameFinished = false
     
     let MATCH_REWARD = 2
@@ -54,12 +54,6 @@ class GameLogic {
         }
         
         cards.shuffle() //put all cards in a random order
-    
-        //DEBUG
-        print("cards are")
-        for card in cards{
-            print("card "+card.textureFront)
-        }
         
     }
     
@@ -73,24 +67,26 @@ class GameLogic {
             currentCard.state = CardState.facingUp
             
             //If we had a selected card
-            if let selected_card = self.selectedCard{
+            if let selected_card = self.previousSelectedCard{
                 //it's a match!
-                if(selectedCard?.pairId == currentCard.id){
+                if(previousSelectedCard?.pairId == currentCard.id){
                     currentCard.state = CardState.matched
                     selected_card.state = CardState.matched
                     score()
                 } else{
+                    currentStreak = 0
+                    print("currentstreak \(currentStreak))")
+                    
                     currentCard.state = CardState.facingDown
                     selected_card.state = CardState.facingDown
                     delegate?.cardUntapped(idCard: currentCard.id)
-                    
-                    currentStreak = 0
+                    delegate?.cardUntapped(idCard: selected_card.id)
                 }
-                self.selectedCard = nil
+                self.previousSelectedCard = nil
                 
             // if we had nothing selected
             } else{
-                self.selectedCard = cards[cardInd]
+                self.previousSelectedCard = currentCard
             }
             delegate?.cardTapped(idCard: currentCard.id, newTexture: currentCard.textureFront)
         }
@@ -99,6 +95,7 @@ class GameLogic {
     
     func pointsEarned(gainedPoints:Int){
         points += gainedPoints
+        delegate?.pointsAdded(totalPoints: points)
         //call points label delegate
     }
     
@@ -114,10 +111,15 @@ class GameLogic {
 
     //we scored some points
     func score(){
+        print("scoring")
+        
+        print("currentstreak \(currentStreak))")
+        currentStreak += 1
+        print("currentstreak \(currentStreak))")
+        points += currentStreak * MATCH_REWARD
+        pointsEarned(gainedPoints: points)
+        
         if(currentStreak > 0){
-            currentStreak += 1
-            points += currentStreak * MATCH_REWARD
-            pointsEarned(gainedPoints: points)
         }
         
     }

@@ -10,8 +10,8 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate {
-   
+class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +42,7 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
         return true
     }
     
-    func goBack(sender: AboutScene) {
+    func goToMenu(sender: AboutScene) {
         if let view = self.view as? SKView{
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
@@ -59,7 +59,6 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
             scene.aboutDelegate = self
             scene.scaleMode = .aspectFill
             view.presentScene(scene, transition: .reveal(with: .left, duration: 0.4))
-            //view.presentScene(scene)
         }
     }
     
@@ -68,8 +67,17 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
             let scene = GameScene(size: view.frame.size)
             //delegate
             scene.scaleMode = .aspectFill
-            //view.presentScene(scene, transition: .reveal(with: .left, duration: 0.3))
+            scene.gameDelegate = self
             view.presentScene(scene)
+        }
+    }
+    
+    func goToMenu(sender: GameScene) {
+        if let view = self.view as? SKView{
+            let scene = MenuScene(size: view.frame.size)
+            scene.menuDelegate = self
+            scene.scaleMode = .aspectFill
+            view.presentScene(scene, transition: .reveal(with: .right, duration: 0.3))
         }
     }
     

@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 protocol AboutSceneDelegate: class {
-    func goBack(sender: AboutScene)
+    func goToMenu(sender: AboutScene)
 }
 
 class AboutScene: SKScene, ButtonDelegate {
@@ -83,7 +83,7 @@ class AboutScene: SKScene, ButtonDelegate {
     
     func onTap(sender: Button) {
         if(sender == backButton){
-            aboutDelegate?.goBack(sender: self)
+            aboutDelegate?.goToMenu(sender: self)
         }
         
     }
