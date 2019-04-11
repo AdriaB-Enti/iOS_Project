@@ -33,16 +33,13 @@ class GameLogic {
     var previousSelectedCard: Card? //the card we have currently selected
     var gameFinished = false
     
-    let MATCH_REWARD = 2
+    let MATCH_REWARD = 4
     
-    let textureNames = ["Card0","Card1","Card2","Card3","Card4","Card5","Card6","Card7","Card8","Card9","Card10","Card11","Card12","Card13","Card14"] //testing
-    //let textureNames = ["testA","testB","testC","testD","testE","testF","testG","testH"]
-    
-    var level = Level.easy
+    let textureNames = ["Card0","Card1","Card2","Card3","Card4","Card5","Card6","Card7","Card8","Card9","Card10","Card11","Card12","Card13","Card14"]
     
     func start(startdifficulty:Level){
         
-        level = startdifficulty
+        let level = startdifficulty
         let currentTextures = textureNames.prefix(upTo: level.getNumberOfCards()/2) //We divide in 2 because each card will have an identical match
         
         //make a duplicate for each card
@@ -93,12 +90,6 @@ class GameLogic {
         checkGameFinishied()
     }
     
-    func pointsEarned(gainedPoints:Int){
-        points += gainedPoints
-        delegate?.pointsAdded(totalPoints: points)
-        //call points label delegate
-    }
-    
     func checkGameFinishied(){
         for card in cards{
             if(card.state != CardState.matched){
@@ -111,16 +102,10 @@ class GameLogic {
 
     //we scored some points
     func score(){
-        print("scoring")
-        
-        print("currentstreak \(currentStreak))")
         currentStreak += 1
-        print("currentstreak \(currentStreak))")
         points += currentStreak * MATCH_REWARD
-        pointsEarned(gainedPoints: points)
         
-        if(currentStreak > 0){
-        }
+        delegate?.pointsAdded(totalPoints: points)
         
     }
     

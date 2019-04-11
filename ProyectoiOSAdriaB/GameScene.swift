@@ -72,13 +72,17 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         }*/
         
         
-        gameLogic.start(startdifficulty: Level.easy)
+        gameLogic.start(startdifficulty: Level.medium)
         gameLogic.delegate = self
         
         let TOTAL_ROWS = 3
-        let totalCols = gameLogic.cards.count / TOTAL_ROWS
         
-        let x_separation = (Double(view.frame.width) / Double(1 + (totalCols)))
+        let totalCols = Int( ceil(Double(gameLogic.cards.count) / Double(TOTAL_ROWS)) )
+        
+        let x_offsetLeft = 10.0
+        
+        
+        let x_separation = (Double(Double(view.frame.width) - x_offsetLeft) / Double(1 + (totalCols)))
         let y_separation = (Double(view.frame.height) / Double(1 + (TOTAL_ROWS)))
         let y_offset = -10.0
         print("totalcols\(totalCols) ")
@@ -86,8 +90,11 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         
         for row in 0...TOTAL_ROWS-1{
             for col in 0...totalCols-1{
+                if((col + row * totalCols) == gameLogic.cards.count){
+                    break;
+                }
+                
                 let card = gameLogic.cards[col + row * totalCols]
-                print("textureName " + card.textureFront)
                 let aCard = CardSprite(imageNamed: card.textureBack)
                 aCard.cardID = card.id
                 aCard.isUserInteractionEnabled = true
@@ -98,7 +105,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
                 //TODO posicionar bé
                 //aCard.position = CGPoint(x: Double(col * 20), y: Double(row * 200))
                 //aCard.position = CGPoint(x: separation + cardWidth/2.0 + Double(col) * (separation+cardWidth), y: Double(view.frame.height) / 4.0 + Double(row) * Double(view.frame.height) / 3.0)
-                aCard.position = CGPoint(x: x_separation * Double(col+1), y: (Double(1+row) * y_separation) + y_offset)
+                aCard.position = CGPoint(x: x_offsetLeft + x_separation * Double(col+1), y: Double(view.frame.height)-(Double(1+row) * y_separation) + y_offset)
                 aCard.scale(to: CGSize(width: cardWidth, height: cardHeight))
                 originalXscale = aCard.xScale
                 cardSprites.append(aCard)

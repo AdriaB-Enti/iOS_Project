@@ -117,7 +117,6 @@ class MenuScene: SKScene, ButtonDelegate {
     }
     
     func onTap(sender: Button) {
-        print("WHY")
         if(sender == startButton){
             menuDelegate?.goToGame(sender: self)
         }
