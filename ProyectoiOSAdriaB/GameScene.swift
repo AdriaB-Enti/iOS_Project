@@ -22,6 +22,8 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var cardtest = CardSprite()
     private var mainMenuB = Button(rect: CGRect(x: 0, y: 0, width: 60, height: 40), cornerRadius: 15)
     
+    public var startDif = Level.easy
+    
     weak var gameDelegate:GameSceneDelegate?
     
     var cardWidth = 96.0
@@ -108,8 +110,8 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         }*/
         
         
-        gameLogic.start(startdifficulty: Level.medium )
-        remainingTime = Double(gameLogic.getLevelTime(level: Level.medium))
+        gameLogic.start(startdifficulty: startDif)
+        remainingTime = Double(gameLogic.getLevelTime(level: startDif))
         gameLogic.delegate = self
         
         let TOTAL_ROWS = 3

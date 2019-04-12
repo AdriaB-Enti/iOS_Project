@@ -11,7 +11,7 @@ import GameplayKit
 
 protocol MenuSceneDelegate: class {
     func goToAbout(sender: MenuScene)
-    func goToGame(sender: MenuScene)
+    func goToGame(sender: MenuScene, level:Level)
 }
 
 class MenuScene: SKScene, ButtonDelegate {
@@ -85,7 +85,7 @@ class MenuScene: SKScene, ButtonDelegate {
         
         
         easyButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.6)
-        easyButton.fillColor = .white
+        easyButton.fillColor = UIColor(named: "SecondOrange")!
         easyButton.isUserInteractionEnabled = true
         easyButton.delegate = self
         easyButton.setText(text: "Easy")
@@ -153,7 +153,7 @@ class MenuScene: SKScene, ButtonDelegate {
     
     func onTap(sender: Button) {
         if(sender == startButton){
-            menuDelegate?.goToGame(sender: self)
+            menuDelegate?.goToGame(sender: self, level: selectedDif)
         }
         /*if(sender == optionsButton){
             

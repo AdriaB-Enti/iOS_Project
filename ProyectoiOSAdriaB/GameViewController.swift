@@ -62,9 +62,10 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
         }
     }
     
-    func goToGame(sender: MenuScene) {
+    func goToGame(sender: MenuScene, level:Level) {
         if let view = self.view as? SKView{
             let scene = GameScene(size: view.frame.size)
+            scene.startDif = level
             scene.scaleMode = .aspectFill
             scene.gameDelegate = self
             view.presentScene(scene, transition: .fade(withDuration: 0.3))
