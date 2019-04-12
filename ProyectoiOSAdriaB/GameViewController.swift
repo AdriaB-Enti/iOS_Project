@@ -25,8 +25,8 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
             // Present the scene
             view.presentScene(scene)
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            //view.showsFPS = true
+            //view.showsNodeCount = true
         }
     }
 
@@ -65,10 +65,9 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     func goToGame(sender: MenuScene) {
         if let view = self.view as? SKView{
             let scene = GameScene(size: view.frame.size)
-            //delegate
             scene.scaleMode = .aspectFill
             scene.gameDelegate = self
-            view.presentScene(scene)
+            view.presentScene(scene, transition: .fade(withDuration: 0.3))
         }
     }
     

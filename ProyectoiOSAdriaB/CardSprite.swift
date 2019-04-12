@@ -10,7 +10,7 @@
 import SpriteKit
 
 protocol CardDelegate: class {
-    func onTap(sender: CardSprite)
+    func onCardTap(sender: CardSprite)
 }
 
 class CardSprite : SKSpriteNode{
@@ -32,7 +32,7 @@ class CardSprite : SKSpriteNode{
         if let touch = touches.first, let parent = parent {
             if frame.contains(touch.location(in: parent)){
                 if let delegate = delegate {
-                    delegate.onTap(sender: self)
+                    delegate.onCardTap(sender: self)
                 }
             }
         }

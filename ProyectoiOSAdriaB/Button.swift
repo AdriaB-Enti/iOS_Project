@@ -36,6 +36,11 @@ class Button: SKShapeNode{
         textLabel.fontColor = color
     }
     
+    func setTextSize(newSize:Int){
+        textLabel.fontSize = CGFloat(newSize)
+        
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let action = SKAction.scale(by: 0.9, duration: 0.1)

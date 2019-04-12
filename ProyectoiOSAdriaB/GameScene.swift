@@ -20,18 +20,25 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var gameLogic = GameLogic()
     private var cardSprites = [CardSprite]()
     private var cardtest = CardSprite()
-    private var mainMenuB = Button(rect: CGRect(x: 35, y: 100, width: 40, height: 40), cornerRadius: 15)
+    private var mainMenuB = Button(rect: CGRect(x: 0, y: 0, width: 60, height: 40), cornerRadius: 15)
     
     weak var gameDelegate:GameSceneDelegate?
     
     var cardWidth = 96.0
     var cardHeight = 117.0
     var originalXscale = CGFloat(1)
+    var remainingTime = 60.0 {
+        didSet{
+            labelTime?.text = formatTimeSeconds(seconds: remainingTime)
+            
+        }
+    }
     //var atestCard :SKSpriteNode?
     
     override func didMove(to view: SKView) {
         print("width is \(view.frame.width)")
         print("height is \(view.frame.height)")
+        
         /*
         self.label = SKLabelNode(text:"test scene")
         if let label = self.label {
@@ -44,19 +51,48 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         
         // Create shape node to use during mouse interaction
         //mainMenuB.position.y = CGFloat(view.frame.height)*0.9
-        mainMenuB.fillColor = UIColor(named: "myOrange")!
+        mainMenuB.fillColor = UIColor(cgColor: SKColor.gray.cgColor)
+        mainMenuB.position = CGPoint(x: 18.0, y: Double(view.frame.height)-45.0) //NOPE
+        mainMenuB.setText(text: "BACK")
+        mainMenuB.setTextSize(newSize: 11)
+        mainMenuB.isUserInteractionEnabled = true
         mainMenuB.delegate = self
         addChild(mainMenuB)
         
         
         labelTime = SKLabelNode(text: "0:0")
-        labelTime?.position = CGPoint(x: Double(view.frame.width)*0.95, y: Double(view.frame.height)*0.9)
+        labelTime?.fontSize = 19
+        labelTime?.fontName = "HeroesLegend"
+        labelTime?.text = formatTimeSeconds(seconds: remainingTime)
+        labelTime?.position = CGPoint(x: Double(view.frame.width)*0.93, y: Double(view.frame.height)*0.93)
         if let time = labelTime{
             addChild(time)
         }
+        //Timer
+        let updateTimerBlock = SKAction.run({
+            [unowned self] in
+            
+            if self.remainingTime > 0{
+                self.remainingTime -= 1
+            } else{
+                self.removeAction(forKey: "countdown")
+                self.gameLogic.gameFinished = true
+                
+                let labelLose = SKLabelNode(text: "You Lose!")
+                labelLose.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height/2)
+                labelLose.fontColor = .white
+                labelLose.fontSize = 35
+                labelLose.fontName = "HeroesLegend"
+                self.addChild(labelLose)
+            }
+        })
+        let sequence = SKAction.sequence([SKAction.wait(forDuration: 1.0),updateTimerBlock])
+        run(SKAction.repeatForever(sequence), withKey: "countdown")
         
         labelPoints = SKLabelNode(text: "Score: 0")
-        labelPoints?.position = CGPoint(x: Double(view.frame.width)*0.70, y: Double(view.frame.height)*0.9)
+        labelPoints?.fontName = "HeroesLegend"
+        labelPoints?.fontSize = 19
+        labelPoints?.position = CGPoint(x: Double(view.frame.width)*0.70, y: Double(view.frame.height)*0.93)
         if let points = labelPoints{
             addChild(points)
         }
@@ -72,7 +108,8 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         }*/
         
         
-        gameLogic.start(startdifficulty: Level.medium)
+        gameLogic.start(startdifficulty: Level.medium )
+        remainingTime = Double(gameLogic.getLevelTime(level: Level.medium))
         gameLogic.delegate = self
         
         let TOTAL_ROWS = 3
@@ -80,11 +117,14 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         let totalCols = Int( ceil(Double(gameLogic.cards.count) / Double(TOTAL_ROWS)) )
         
         let x_offsetLeft = 10.0
+        let y_offset = 40.0
+        
+        cardHeight = (Double(view.frame.height)-y_offset)/3.0
+        cardWidth = (117/cardHeight) * cardWidth
         
         
         let x_separation = (Double(Double(view.frame.width) - x_offsetLeft) / Double(1 + (totalCols)))
-        let y_separation = (Double(view.frame.height) / Double(1 + (TOTAL_ROWS)))
-        let y_offset = -10.0
+        let y_separation = ((Double(view.frame.height)-y_offset) / Double((TOTAL_ROWS)))
         print("totalcols\(totalCols) ")
         print("separation \(Double(1 + (totalCols)))")
         
@@ -105,7 +145,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
                 //TODO posicionar bé
                 //aCard.position = CGPoint(x: Double(col * 20), y: Double(row * 200))
                 //aCard.position = CGPoint(x: separation + cardWidth/2.0 + Double(col) * (separation+cardWidth), y: Double(view.frame.height) / 4.0 + Double(row) * Double(view.frame.height) / 3.0)
-                aCard.position = CGPoint(x: x_offsetLeft + x_separation * Double(col+1), y: Double(view.frame.height)-(Double(1+row) * y_separation) + y_offset)
+                aCard.position = CGPoint(x: x_offsetLeft + x_separation * Double(col+1), y: Double(view.frame.height)-(Double(row) * y_separation) - y_offset - cardHeight/2.0)
                 aCard.scale(to: CGSize(width: cardWidth, height: cardHeight))
                 originalXscale = aCard.xScale
                 cardSprites.append(aCard)
@@ -115,6 +155,13 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         }
     }
     
+    func formatTimeSeconds(seconds:Double) -> String{
+        
+        var minutes = Int(seconds) / 60
+        var remSec = Int(seconds - Double(minutes) * 60.0)
+        
+        return "\(minutes):\(remSec)"
+    }
     
     func touchDown(atPoint pos : CGPoint) {
     }
@@ -143,50 +190,52 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        //testing per provar d'anar movent el logo
-        /*if let logo = self.logo{
-            //logo.position.x += 0.01
-            
-        }*/
-
+        //remainingTime -= currentTime
+        //labelTime?.text = "\(remainingTime)"
+        //labelTime?.text = formatTimeSeconds(seconds: remainingTime)
+        //labelTime?.text = "\(currentTime)"
     }
-    func onTap(sender: Button) {
-        print("ontapB")
-        if(sender == mainMenuB){
-            print("ontap Main Menu B")
-            gameDelegate?.goToMenu(sender: self)
-        }
-    }
-    func onTap(sender: CardSprite) {
+    
+    func onCardTap(sender: CardSprite) {
         gameLogic.selectCard(cardInd: sender.cardID)
         print("card \(sender.cardID)pressed")
     }
     
+    func onTap(sender: Button) {
+        if(sender == mainMenuB){
+            removeAction(forKey: "countdown")
+            gameDelegate?.goToMenu(sender: self)
+        }
+    }
     
-    
-    //Go back to leave the card showing  its back
+    //Go back to leave the card showing its back
     func cardUntapped(idCard: Int) {
         print("untapping\(idCard)")
         for cardSp in cardSprites{
             if(cardSp.cardID  == idCard){
                 //animacio de carta girada
-                print("untapping card")
                 //var originalXscale = cardSp.xScale
-                let pulse = SKAction.sequence([SKAction.wait(forDuration: 0.9), SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                let pulse = SKAction.sequence([SKAction.wait(forDuration: 0.9), SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.2)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
                 cardSp.run(pulse)
                 
-                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 1.2), SKAction.setTexture(SKTexture(imageNamed:  "CardBack")),
-                                                SKAction.scaleX(to: CGFloat(originalXscale), y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 1.1), SKAction.setTexture(SKTexture(imageNamed:  "CardBack")),
+                                                SKAction.scaleX(to: CGFloat(originalXscale), y: cardSp.yScale, duration: 0.2)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
                 cardSp.run(pulse2)
-                print("untap")
             }
         }
     }
     
-    func gameFinished() {
-        print("gameFinished")
+    func gameFinished(win: Bool) {
+        print("gameFinished------------------------")
+        removeAction(forKey: "countdown")
+        if(win){
+            let labelWin = SKLabelNode(text: "You Won!")
+            labelWin.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height/2)
+            labelWin.fontColor = .white
+            labelWin.fontSize = 35
+            labelWin.fontName = "HeroesLegend"
+            addChild(labelWin)
+        }
     }
     
     //Spin for the first Time
@@ -195,11 +244,11 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
             if(cardSp.cardID  == idCard){
                 //var originalXscale = cardSp.xScale
                 
-                let pulse = SKAction.sequence([ SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                let pulse = SKAction.sequence([ SKAction.scaleX(to: 0.0, y: cardSp.yScale, duration: 0.2)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
                 cardSp.run(pulse)
                 
-                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.setTexture(SKTexture(imageNamed:  newTexture)),
-                                                SKAction.scaleX(to: CGFloat(originalXscale), y: cardSp.yScale, duration: 0.3)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
+                let pulse2 = SKAction.sequence([SKAction.wait(forDuration: 0.2), SKAction.setTexture(SKTexture(imageNamed:  newTexture)),
+                                                SKAction.scaleX(to: CGFloat(originalXscale), y: cardSp.yScale, duration: 0.2)]) //,  SKAction.scaleX(by: 1, y: 1, duration: 0.3)
                 cardSp.run(pulse2)
             }
         }

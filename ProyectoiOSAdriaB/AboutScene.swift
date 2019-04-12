@@ -39,6 +39,12 @@ class AboutScene: SKScene, ButtonDelegate {
         backButton.setText(text: "Back")
         backButton.setTextColor(color: .white)
         addChild(backButton)
+        
+        let madeby = SKLabelNode()
+        madeby.text = "A Game made by Adrià Biarnés"
+        madeby.color = SKColor.yellow
+        madeby.position = CGPoint(x: (view.frame.width/2.0), y: (view.frame.height / 2.0))
+        addChild(madeby)
     }
     
     

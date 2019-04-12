@@ -20,7 +20,7 @@ enum Level: Int {
 protocol GameLogicDelegate: class {
     func cardUntapped(idCard:Int)       //la tornem a deixar a l'estat origina (sense veure la imatge)
     func cardTapped(idCard:Int, newTexture:String)         //girada per primer cop
-    func gameFinished()
+    func gameFinished(win:Bool)
     func pointsAdded(totalPoints:Int)
 }
 
@@ -31,7 +31,7 @@ class GameLogic {
     var points = 0
     var currentStreak = 0
     var previousSelectedCard: Card? //the card we have currently selected
-    var gameFinished = false
+    public var gameFinished = false
     
     let MATCH_REWARD = 4
     
@@ -59,44 +59,51 @@ class GameLogic {
     }
     
     func selectCard(cardInd:Int){
-        let currentCard = getCard(id: cardInd)
-        if(currentCard.state == CardState.facingDown){
-            currentCard.state = CardState.facingUp
-            
-            //If we had a selected card
-            if let selected_card = self.previousSelectedCard{
-                //it's a match!
-                if(previousSelectedCard?.pairId == currentCard.id){
-                    currentCard.state = CardState.matched
-                    selected_card.state = CardState.matched
-                    score()
-                } else{
-                    currentStreak = 0
-                    print("currentstreak \(currentStreak))")
-                    
-                    currentCard.state = CardState.facingDown
-                    selected_card.state = CardState.facingDown
-                    delegate?.cardUntapped(idCard: currentCard.id)
-                    delegate?.cardUntapped(idCard: selected_card.id)
-                }
-                self.previousSelectedCard = nil
+        if(!gameFinished){
+            let currentCard = getCard(id: cardInd)
+            if(currentCard.state == CardState.facingDown){
+                currentCard.state = CardState.facingUp
                 
-            // if we had nothing selected
-            } else{
-                self.previousSelectedCard = currentCard
+                //If we had a selected card
+                if let selected_card = self.previousSelectedCard{
+                    //it's a match!
+                    if(previousSelectedCard?.pairId == currentCard.id){
+                        currentCard.state = CardState.matched
+                        selected_card.state = CardState.matched
+                        score()
+                    } else{
+                        currentStreak = 0
+                        print("currentstreak \(currentStreak))")
+                        
+                        currentCard.state = CardState.facingDown
+                        selected_card.state = CardState.facingDown
+                        delegate?.cardUntapped(idCard: currentCard.id)
+                        delegate?.cardUntapped(idCard: selected_card.id)
+                    }
+                    self.previousSelectedCard = nil
+                    
+                // if we had nothing selected
+                } else{
+                    self.previousSelectedCard = currentCard
+                }
+                delegate?.cardTapped(idCard: currentCard.id, newTexture: currentCard.textureFront)
             }
-            delegate?.cardTapped(idCard: currentCard.id, newTexture: currentCard.textureFront)
+            checkGameFinishied()
+            
         }
-        checkGameFinishied()
     }
     
     func checkGameFinishied(){
+        var isOver = true
         for card in cards{
             if(card.state != CardState.matched){
+                isOver = false
                 break
             }
+        }
+        if(isOver){
             gameFinished = true
-            //TODO: show victory message screen or something
+            delegate?.gameFinished(win: true)
         }
     }
 
@@ -106,7 +113,6 @@ class GameLogic {
         points += currentStreak * MATCH_REWARD
         
         delegate?.pointsAdded(totalPoints: points)
-        
     }
     
     func getCard(id:Int) -> Card{
@@ -117,5 +123,16 @@ class GameLogic {
             }
         }
         return thecard
+    }
+    
+    func getLevelTime(level:Level) -> Int{
+        switch level {
+        case Level.easy:
+            return 80
+        case Level.medium:
+            return 95
+        case Level.hard:
+            return 105
+        }
     }
 }

@@ -25,10 +25,14 @@ class MenuScene: SKScene, ButtonDelegate {
     //MENU BUTTONS
     private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 300, height: 100), cornerRadius: 15)
     
-    private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
+    //private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
 
     private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 230, height: 80), cornerRadius: 15)
-
+    let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
+    let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
+    let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
+    
+    var selectedDif = Level.easy
     
     override func didMove(to view: SKView) {
         
@@ -42,12 +46,12 @@ class MenuScene: SKScene, ButtonDelegate {
         startButton.setTextColor(color: .black)
         addChild(startButton)
         
-        optionsButton.fillColor = UIColor(named: "myGray")!
+        /*optionsButton.fillColor = UIColor(named: "myGray")!
         optionsButton.position = CGPoint(x: (8.75*view.frame.width/10.0) - optionsButton.frame.width/2.0, y: (9.5*view.frame.height / 10.0) - optionsButton.frame.height/2.0)
         optionsButton.isUserInteractionEnabled = true
         optionsButton.delegate = self
         optionsButton.setTextColor(color: .black)
-        addChild(optionsButton)
+        addChild(optionsButton)*/
         
         aboutButton.fillColor = UIColor(named: "myOrange")!
         aboutButton.position = CGPoint(x: (view.frame.width/2.0) - aboutButton.frame.width/2.0, y: (view.frame.height / 5.5) - aboutButton.frame.height/2.0)
@@ -77,6 +81,37 @@ class MenuScene: SKScene, ButtonDelegate {
             label.fontSize = 35
             label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
         }
+        
+        
+        
+        easyButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.6)
+        easyButton.fillColor = .white
+        easyButton.isUserInteractionEnabled = true
+        easyButton.delegate = self
+        easyButton.setText(text: "Easy")
+        easyButton.setTextColor(color: .black)
+        easyButton.setTextSize(newSize: 25)
+        addChild(easyButton)
+        
+        
+        mediumButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.4)
+        mediumButton.fillColor = .white
+        mediumButton.isUserInteractionEnabled = true
+        mediumButton.delegate = self
+        mediumButton.setText(text: "Medium")
+        mediumButton.setTextColor(color: .black)
+        mediumButton.setTextSize(newSize: 25)
+        addChild(mediumButton)
+        
+        
+        hardButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.2)
+        hardButton.fillColor = .white
+        hardButton.isUserInteractionEnabled = true
+        hardButton.delegate = self
+        hardButton.setText(text: "Hard")
+        hardButton.setTextColor(color: .black)
+        hardButton.setTextSize(newSize: 25)
+        addChild(hardButton)
         
     }
     
@@ -120,12 +155,31 @@ class MenuScene: SKScene, ButtonDelegate {
         if(sender == startButton){
             menuDelegate?.goToGame(sender: self)
         }
-        if(sender == optionsButton){
+        /*if(sender == optionsButton){
             
-        }
+        }*/
         
         if(sender == aboutButton){
             menuDelegate?.goToAbout(sender: self)
+        }
+        
+        if(sender == easyButton){
+            selectedDif = Level.easy
+            easyButton.fillColor = UIColor(named: "SecondOrange")!
+            mediumButton.fillColor = .white
+            hardButton.fillColor = .white
+        }
+        if(sender == mediumButton){
+            selectedDif = Level.medium
+            easyButton.fillColor = .white
+            mediumButton.fillColor = UIColor(named: "SecondOrange")!
+            hardButton.fillColor = .white
+        }
+        if(sender == hardButton){
+            selectedDif = Level.hard
+            easyButton.fillColor = .white
+            mediumButton.fillColor = .white
+            hardButton.fillColor = UIColor(named: "SecondOrange")!
         }
     }
 }
