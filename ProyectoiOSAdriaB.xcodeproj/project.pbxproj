@@ -26,6 +26,7 @@
 		99EC576243C3F1A9758DCE1D /* Pods_ProyectoiOSAdriaB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFBCBBB876315D9F512B666 /* Pods_ProyectoiOSAdriaB.framework */; };
 		BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */; };
 		BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */; };
+		BC5380D02271ECB20021CD66 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CF2271ECB20021CD66 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		62E4313622314E590007D61C /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
+		BC5380CF2271ECB20021CD66 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				621491902243CF370000F0DE /* Card.swift */,
 				621491922243DAC00000F0DE /* CardSprite.swift */,
 				BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */,
+				BC5380CF2271ECB20021CD66 /* Preferences.swift */,
 			);
 			path = ProyectoiOSAdriaB;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				62E4313522314A060007D61C /* MenuScene.swift in Sources */,
 				BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */,
 				62E0322D22296E2A0021BD63 /* GameViewController.swift in Sources */,
+				BC5380D02271ECB20021CD66 /* Preferences.swift in Sources */,
 				62E0322522296E290021BD63 /* AppDelegate.swift in Sources */,
 				6214918F2243CEF10000F0DE /* GameLogic.swift in Sources */,
 				621491912243CF370000F0DE /* Card.swift in Sources */,

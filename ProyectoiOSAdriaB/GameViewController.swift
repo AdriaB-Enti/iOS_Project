@@ -15,9 +15,11 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userId = "FF4F2CA9-0D9F-4E03-A300-6494A46CE32F" //UUID().uuidString
+        //let userId = "FF4F2CA9-0D9F-4E03-A300-6494A46CE32F" //UUID().uuidString
         
-        FirestoreRepository().updateUserScore(score: 6, username: "eladri", userId: userId)
+        Preferences().getUserID()
+        
+        //FirestoreRepository().updateUserScore(score: 6, username: "eladri", userId: userId)
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
