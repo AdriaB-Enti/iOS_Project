@@ -1,0 +1,6 @@
+framework module Pods_ProyectoiOSAdriaB {
+  umbrella header "Pods-ProyectoiOSAdriaB-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>803515927402-mkmo5mtg43vipfk9i6oe9ipnosb6cutp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.803515927402-mkmo5mtg43vipfk9i6oe9ipnosb6cutp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCH7ML6o2kGkQS70Wb4Pu6vUYTWapCpUt8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>803515927402</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>adriaB.ProyectoiOSAdriaB</string>
+	<key>PROJECT_ID</key>
+	<string>projecteios-93441</string>
+	<key>STORAGE_BUCKET</key>
+	<string>projecteios-93441.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:803515927402:ios:63fc97444033de74</string>
+	<key>DATABASE_URL</key>
+	<string>https://projecteios-93441.firebaseio.com</string>
+</dict>
+</plist>

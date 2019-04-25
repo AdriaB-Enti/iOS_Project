@@ -23,9 +23,15 @@
 		62E0323522296E2D0021BD63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E0323322296E2D0021BD63 /* LaunchScreen.storyboard */; };
 		62E4313522314A060007D61C /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E4313422314A060007D61C /* MenuScene.swift */; };
 		62E4313722314E590007D61C /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E4313622314E590007D61C /* Button.swift */; };
+		99EC576243C3F1A9758DCE1D /* Pods_ProyectoiOSAdriaB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFBCBBB876315D9F512B666 /* Pods_ProyectoiOSAdriaB.framework */; };
+		BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */; };
+		BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EEADD49F4E38B980BEF41F5 /* Pods-ProyectoiOSAdriaB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProyectoiOSAdriaB.release.xcconfig"; path = "Target Support Files/Pods-ProyectoiOSAdriaB/Pods-ProyectoiOSAdriaB.release.xcconfig"; sourceTree = "<group>"; };
+		4AFBCBBB876315D9F512B666 /* Pods_ProyectoiOSAdriaB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProyectoiOSAdriaB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2C42E9F9C617E0A9C9B96D /* Pods-ProyectoiOSAdriaB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProyectoiOSAdriaB.debug.xcconfig"; path = "Target Support Files/Pods-ProyectoiOSAdriaB/Pods-ProyectoiOSAdriaB.debug.xcconfig"; sourceTree = "<group>"; };
 		6214918E2243CEF10000F0DE /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		621491902243CF370000F0DE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		621491922243DAC00000F0DE /* CardSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
@@ -44,6 +50,8 @@
 		62E0323622296E2D0021BD63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E4313422314A060007D61C /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		62E4313622314E590007D61C /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,18 +59,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99EC576243C3F1A9758DCE1D /* Pods_ProyectoiOSAdriaB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33EEC9061C8669189473FF97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B2C42E9F9C617E0A9C9B96D /* Pods-ProyectoiOSAdriaB.debug.xcconfig */,
+				0EEADD49F4E38B980BEF41F5 /* Pods-ProyectoiOSAdriaB.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5043F939AD3FD8D53A34CBA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AFBCBBB876315D9F512B666 /* Pods_ProyectoiOSAdriaB.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		62E0321822296E290021BD63 = {
 			isa = PBXGroup;
 			children = (
 				6295D533223BD61000E9AE81 /* Heroes Legend Hollow.ttf */,
 				62E0322322296E290021BD63 /* ProyectoiOSAdriaB */,
 				62E0322222296E290021BD63 /* Products */,
+				33EEC9061C8669189473FF97 /* Pods */,
+				5043F939AD3FD8D53A34CBA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +105,7 @@
 		62E0322322296E290021BD63 /* ProyectoiOSAdriaB */ = {
 			isa = PBXGroup;
 			children = (
+				BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */,
 				6295D532223BD4A500E9AE81 /* HeroesLegend.ttf */,
 				62E0322422296E290021BD63 /* AppDelegate.swift */,
 				62E0322622296E290021BD63 /* GameScene.sks */,
@@ -93,6 +122,7 @@
 				6214918E2243CEF10000F0DE /* GameLogic.swift */,
 				621491902243CF370000F0DE /* Card.swift */,
 				621491922243DAC00000F0DE /* CardSprite.swift */,
+				BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */,
 			);
 			path = ProyectoiOSAdriaB;
 			sourceTree = "<group>";
@@ -104,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62E0323922296E2D0021BD63 /* Build configuration list for PBXNativeTarget "ProyectoiOSAdriaB" */;
 			buildPhases = (
+				F1F77AE23797500468F1A72D /* [CP] Check Pods Manifest.lock */,
 				62E0321D22296E290021BD63 /* Sources */,
 				62E0321E22296E290021BD63 /* Frameworks */,
 				62E0321F22296E290021BD63 /* Resources */,
+				9C35CFB1BC912264734915B2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6295D534223BD61000E9AE81 /* Heroes Legend Hollow.ttf in Resources */,
+				BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */,
 				62E0323022296E2A0021BD63 /* Main.storyboard in Resources */,
 				6295D535223BD73600E9AE81 /* HeroesLegend.ttf in Resources */,
 				62E0322722296E290021BD63 /* GameScene.sks in Resources */,
@@ -167,6 +200,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9C35CFB1BC912264734915B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProyectoiOSAdriaB/Pods-ProyectoiOSAdriaB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProyectoiOSAdriaB/Pods-ProyectoiOSAdriaB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1F77AE23797500468F1A72D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProyectoiOSAdriaB-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		62E0321D22296E290021BD63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -177,6 +269,7 @@
 				6295D537223BD89500E9AE81 /* AboutScene.swift in Sources */,
 				621491932243DAC00000F0DE /* CardSprite.swift in Sources */,
 				62E4313522314A060007D61C /* MenuScene.swift in Sources */,
+				BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */,
 				62E0322D22296E2A0021BD63 /* GameViewController.swift in Sources */,
 				62E0322522296E290021BD63 /* AppDelegate.swift in Sources */,
 				6214918F2243CEF10000F0DE /* GameLogic.swift in Sources */,
@@ -324,6 +417,7 @@
 		};
 		62E0323A22296E2D0021BD63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B2C42E9F9C617E0A9C9B96D /* Pods-ProyectoiOSAdriaB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -341,6 +435,7 @@
 		};
 		62E0323B22296E2D0021BD63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EEADD49F4E38B980BEF41F5 /* Pods-ProyectoiOSAdriaB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
