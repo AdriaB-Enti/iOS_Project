@@ -11,7 +11,9 @@ import GameplayKit
 
 protocol GameSceneDelegate: class {
     func goToMenu(sender: GameScene)
+    func goToNextLevel(sender:GameScene, level:Level)
 }
+
 
 class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var labelTime : SKLabelNode?
@@ -21,6 +23,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var cardSprites = [CardSprite]()
     private var cardtest = CardSprite()
     private var mainMenuB = Button(rect: CGRect(x: 0, y: 0, width: 60, height: 40), cornerRadius: 15)
+    var nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 140, height: 60), cornerRadius: 5)
     
     public var startDif = Level.easy
     
@@ -40,6 +43,11 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     override func didMove(to view: SKView) {
         print("width is \(view.frame.width)")
         print("height is \(view.frame.height)")
+        
+        
+        
+        nextLevelButton.setText(text: "Next Level")
+        nextLevelButton.delegate = self
         
         /*
         self.label = SKLabelNode(text:"test scene")
@@ -208,6 +216,11 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
             removeAction(forKey: "countdown")
             gameDelegate?.goToMenu(sender: self)
         }
+        if(sender == nextLevelButton){
+            
+            
+            
+        }
     }
     
     //Go back to leave the card showing its back
@@ -237,6 +250,10 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
             labelWin.fontSize = 35
             labelWin.fontName = "HeroesLegend"
             addChild(labelWin)
+
+            nextLevelButton = Button(rect: CGRect(x: self.view!.frame.width/2, y: self.view!.frame.height * 0.3, width: 140, height: 60), cornerRadius: 5)
+            nextLevelButton.delegate = self
+            addChild(nextLevelButton)
         }
     }
     

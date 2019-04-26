@@ -9,17 +9,19 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import FirebaseAnalytics
+import GoogleMobileAds
 
-class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate {
+class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate, GADBannerViewDelegate {
 
+    var bannerView: GADBannerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let userId = "FF4F2CA9-0D9F-4E03-A300-6494A46CE32F" //UUID().uuidString
         
-        Preferences().getUserID()
+        addBanner()
         
-        //FirestoreRepository().updateUserScore(score: 6, username: "eladri", userId: userId)
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -70,6 +72,7 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     
     func goToGame(sender: MenuScene, level:Level) {
         if let view = self.view as? SKView{
+            deleteBanner()
             let scene = GameScene(size: view.frame.size)
             scene.startDif = level
             scene.scaleMode = .aspectFill
@@ -80,11 +83,58 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     
     func goToMenu(sender: GameScene) {
         if let view = self.view as? SKView{
+            addBanner()
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
             scene.scaleMode = .aspectFill
             view.presentScene(scene, transition: .reveal(with: .right, duration: 0.3))
         }
     }
+   
+    //TODO: cridar des del gameScene amb el nivell que toqui
+    //per quan tingui forma de passar al següent nivell, podem registrar un event
+    func goToNextLevel(sender:GameScene, level: Level){
+        /*Analytics.logEvent("nextLevel", parameters: ["levelName": level.rawValue])
+        let scene = GameScene(size: view.frame.size)
+        scene.startDif = level
+        scene.scaleMode = .aspectFill
+        scene.gameDelegate = self
+        view.presentScene(scene, transition: .fade(withDuration: 0.3))
+ */
+    }
     
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .left,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .left,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    
+    func deleteBanner(){
+        bannerView.removeFromSuperview()
+    }
+    
+    func addBanner(){
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        //Delegate
+        bannerView.delegate = self
+    }
 }

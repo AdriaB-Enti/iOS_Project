@@ -8,5 +8,6 @@ target 'ProyectoiOSAdriaB' do
   # Pods for ProyectoiOSAdriaB
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
+pod 'Firebase/AdMob'
 
 end
