@@ -94,13 +94,14 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     //TODO: cridar des del gameScene amb el nivell que toqui
     //per quan tingui forma de passar al següent nivell, podem registrar un event
     func goToNextLevel(sender:GameScene, level: Level){
-        /*Analytics.logEvent("nextLevel", parameters: ["levelName": level.rawValue])
-        let scene = GameScene(size: view.frame.size)
-        scene.startDif = level
-        scene.scaleMode = .aspectFill
-        scene.gameDelegate = self
-        view.presentScene(scene, transition: .fade(withDuration: 0.3))
- */
+        //Analytics.logEvent("nextLevel", parameters: ["levelName": level.rawValue])
+        if let view = self.view as? SKView{
+            let scene = GameScene(size: view.frame.size)
+            scene.startDif = level
+            scene.scaleMode = .aspectFill
+            scene.gameDelegate = self
+            view.presentScene(scene, transition: .fade(withDuration: 0.3))
+        }
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
