@@ -218,7 +218,13 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         }
         if(sender == nextLevelButton){
             //fer el mateix que el goToGame
-            gameDelegate?.goToNextLevel(sender: self, level: Level.hard)
+            if(startDif == Level.easy){
+                gameDelegate?.goToNextLevel(sender: self, level: Level.medium)
+            }
+            else if(startDif == Level.medium){
+                gameDelegate?.goToNextLevel(sender: self, level: Level.hard)
+            }
+            
             //TODO: now is hardcoded, check what the next level is (i potser posar un metode per obtenir el seguent nivell)
         }
     }
@@ -251,14 +257,16 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
             labelWin.fontName = "HeroesLegend"
             addChild(labelWin)
 
-            nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 190, height: 60), cornerRadius: 5)
-            nextLevelButton.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height * 0.3)
-            nextLevelButton.fillColor = UIColor(named: "myOrange")!
-            nextLevelButton.delegate = self
-            nextLevelButton.setText(text: "Next level")
-            nextLevelButton.isUserInteractionEnabled = true
-            nextLevelButton.setTextSize(newSize: 15)
-            addChild(nextLevelButton)
+            if(startDif == Level.hard){
+                nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 190, height: 60), cornerRadius: 5)
+                nextLevelButton.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height * 0.3)
+                nextLevelButton.fillColor = UIColor(named: "myOrange")!
+                nextLevelButton.delegate = self
+                nextLevelButton.setText(text: "Next level")
+                nextLevelButton.isUserInteractionEnabled = true
+                nextLevelButton.setTextSize(newSize: 15)
+                addChild(nextLevelButton)
+            }
         }
     }
     

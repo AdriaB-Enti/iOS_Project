@@ -27,6 +27,7 @@
 		BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */; };
 		BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */; };
 		BC5380D02271ECB20021CD66 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CF2271ECB20021CD66 /* Preferences.swift */; };
+		BC5CA152227C690F004FCFC1 /* loginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5CA151227C690F004FCFC1 /* loginScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		BC5380CB2271DD350021CD66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		BC5380CF2271ECB20021CD66 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		BC5CA151227C690F004FCFC1 /* loginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				621491922243DAC00000F0DE /* CardSprite.swift */,
 				BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */,
 				BC5380CF2271ECB20021CD66 /* Preferences.swift */,
+				BC5CA151227C690F004FCFC1 /* loginScene.swift */,
 			);
 			path = ProyectoiOSAdriaB;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				62E4313722314E590007D61C /* Button.swift in Sources */,
 				62E0322B22296E2A0021BD63 /* GameScene.swift in Sources */,
+				BC5CA152227C690F004FCFC1 /* loginScene.swift in Sources */,
 				6295D537223BD89500E9AE81 /* AboutScene.swift in Sources */,
 				621491932243DAC00000F0DE /* CardSprite.swift in Sources */,
 				62E4313522314A060007D61C /* MenuScene.swift in Sources */,
