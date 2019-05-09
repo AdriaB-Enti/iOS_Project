@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  ProyectoiOSAdriaB
+
+  Created by Entipro on 2019/5/9.
+  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "To give you rewards";
+
+NSLocationAlwaysAndWhenInUseUsageDescription = "To give you rewards";

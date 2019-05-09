@@ -11,10 +11,25 @@ import SpriteKit
 import GameplayKit
 import FirebaseAnalytics
 import GoogleMobileAds
+import CoreLocation
 
 class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate, GADBannerViewDelegate {
-
+    
+    let locationManager = CLLocationManager()
+    
     var bannerView: GADBannerView!
+    
+    func initLocation(){
+        locationManager.delegate = self
+
+        if CLLocationManager.authorizationStatus() == .authorizedAlways ||
+            CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +52,8 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
             //view.showsFPS = true
             //view.showsNodeCount = true
         }
+        
+        initLocation()
     }
 
     override var shouldAutorotate: Bool {
@@ -138,5 +155,60 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
         bannerView.load(GADRequest())
         //Delegate
         bannerView.delegate = self
+    }
+    
+    
+}
+
+extension GameViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        switch status {
+            case .authorizedAlways:
+                locationManager.startUpdatingLocation()
+                print("startUpdating")
+            case .denied:
+                print("denied")
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            default:
+                print("default")
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let officeLocation = CLLocation(latitude: 51.50998, longitude: -0.1337)
+        
+        if let lastLocation = locations.last{
+            print("latitude\(lastLocation.coordinate.latitude)")
+            print("longitude\(lastLocation.coordinate.longitude)")
+            
+            if lastLocation.distance(from: officeLocation) < 50{
+                showWelcome()
+                print("user is in location")
+            }
+        }
+        
+    }
+    
+    //si això no ho tenim implmentat peta
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        //print(error.localizedDescription)
+    }
+    
+    func showWelcome(){
+        
+        
+        
+        let dialog  = UIAlertController( title: NSLocalizedString("Hello!", comment: ""),
+            message: NSLocalizedString("congratulations", comment: ""),
+            preferredStyle: .alert)
+        
+        //show
+        let action = UIAlertAction(title : "OK", style: .cancel, handler: nil)
+        
+        dialog.addAction(action)
+        present(dialog, animated: true, completion: nil)
     }
 }

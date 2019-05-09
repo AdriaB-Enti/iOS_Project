@@ -28,6 +28,8 @@
 		BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */; };
 		BC5380D02271ECB20021CD66 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CF2271ECB20021CD66 /* Preferences.swift */; };
 		BC5CA152227C690F004FCFC1 /* loginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5CA151227C690F004FCFC1 /* loginScene.swift */; };
+		BC762FF022845AA4005648F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC762FF222845AA4005648F9 /* Localizable.strings */; };
+		BC762FF822845E48005648F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC762FFA22845E48005648F9 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,12 @@
 		BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		BC5380CF2271ECB20021CD66 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		BC5CA151227C690F004FCFC1 /* loginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginScene.swift; sourceTree = "<group>"; };
+		BC762FEC2284575B005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Main.strings; sourceTree = "<group>"; };
+		BC762FED2284575B005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BC762FF122845AA4005648F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BC762FF322845AAF005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BC762FF922845E48005648F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BC762FFB22845E49005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +137,8 @@
 				BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */,
 				BC5380CF2271ECB20021CD66 /* Preferences.swift */,
 				BC5CA151227C690F004FCFC1 /* loginScene.swift */,
+				BC762FF222845AA4005648F9 /* Localizable.strings */,
+				BC762FFA22845E48005648F9 /* InfoPlist.strings */,
 			);
 			path = ProyectoiOSAdriaB;
 			sourceTree = "<group>";
@@ -177,6 +187,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ca,
 			);
 			mainGroup = 62E0321822296E290021BD63;
 			productRefGroup = 62E0322222296E290021BD63 /* Products */;
@@ -197,10 +208,12 @@
 				BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */,
 				62E0323022296E2A0021BD63 /* Main.storyboard in Resources */,
 				6295D535223BD73600E9AE81 /* HeroesLegend.ttf in Resources */,
+				BC762FF022845AA4005648F9 /* Localizable.strings in Resources */,
 				62E0322722296E290021BD63 /* GameScene.sks in Resources */,
 				62E0323222296E2D0021BD63 /* Assets.xcassets in Resources */,
 				62E0323522296E2D0021BD63 /* LaunchScreen.storyboard in Resources */,
 				62E0322922296E2A0021BD63 /* Actions.sks in Resources */,
+				BC762FF822845E48005648F9 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +305,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				62E0322F22296E2A0021BD63 /* Base */,
+				BC762FEC2284575B005648F9 /* ca */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -300,8 +314,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				62E0323422296E2D0021BD63 /* Base */,
+				BC762FED2284575B005648F9 /* ca */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BC762FF222845AA4005648F9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC762FF122845AA4005648F9 /* en */,
+				BC762FF322845AAF005648F9 /* ca */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BC762FFA22845E48005648F9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC762FF922845E48005648F9 /* en */,
+				BC762FFB22845E49005648F9 /* ca */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -311,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -372,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

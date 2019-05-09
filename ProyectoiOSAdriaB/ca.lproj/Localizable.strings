@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  ProyectoiOSAdriaB
+
+  Created by Entipro on 2019/5/9.
+  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
+*/
+
+"Hello!" = "Hola!";
+"congratulations" = "Felicitats!";

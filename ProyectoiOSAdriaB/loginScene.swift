@@ -9,7 +9,7 @@
 
 import SpriteKit
 import GameplayKit
-
+import CoreLocation
 
 class LoginScene: SKScene, ButtonDelegate {
     
