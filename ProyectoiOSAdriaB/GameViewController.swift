@@ -12,10 +12,12 @@ import GameplayKit
 import FirebaseAnalytics
 import GoogleMobileAds
 import CoreLocation
+import UserNotifications
 
 class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate, GADBannerViewDelegate {
     
     let locationManager = CLLocationManager()
+    let notificationCenter = UNUserNotificationCenter.current()
     
     var bannerView: GADBannerView!
     
@@ -30,6 +32,7 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +57,81 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
         }
         
         initLocation()
+        showHello()
     }
 
+    func showHello(){
+        notificationCenter.requestAuthorization(options: [.alert]){
+            (isAccepted, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if isAccepted {
+                print("User acceoted notification")
+            } else{
+                //show Popup
+                print("user din't accept notification")
+                //es possible que quan aixo s'ececuti, al ser asincron, l'aplicació s'hagi tencat
+                self.showWelcomePopup()
+            }
+        }
+        
+    }
+    
+    
+    func showWelcomePopup(){
+        
+        notificationCenter.getNotificationSettings(completionHandler: {
+            [weak self] (settings) in
+            if settings.authorizationStatus == .authorized{
+                //Send notification
+                self?.sendHelloNotification()
+            } else{
+                //self?.showWelcomePopup()
+            }
+            
+        })
+        
+        let dialog  = UIAlertController( title: NSLocalizedString("Hello!", comment: ""),
+                                         message: NSLocalizedString("congratulations", comment: ""),
+                                         preferredStyle: .alert)
+        
+        //show
+        let action = UIAlertAction(title : "OK", style: .cancel, handler: nil)
+        
+        dialog.addAction(action)
+        present(dialog, animated: true, completion: nil)
+    }
+    
+    func sendHelloNotification(){
+        let identifier = "HelloNotification"
+        
+        //Notification Content
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("Hello!", comment: "Title of the welcome notification")
+        content.body = NSLocalizedString("congratulations", comment: "")
+        
+        //Notification trigger (in X seconds)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        //Notification requet
+        let notificationRequest = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        //Send
+        notificationCenter.add(notificationRequest){ error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     override var shouldAutorotate: Bool {
         return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return .landscape
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -185,7 +255,7 @@ extension GameViewController: CLLocationManagerDelegate {
             print("longitude\(lastLocation.coordinate.longitude)")
             
             if lastLocation.distance(from: officeLocation) < 50{
-                showWelcome()
+                showWelcomePopup()
                 print("user is in location")
             }
         }
@@ -197,18 +267,6 @@ extension GameViewController: CLLocationManagerDelegate {
         //print(error.localizedDescription)
     }
     
-    func showWelcome(){
-        
-        
-        
-        let dialog  = UIAlertController( title: NSLocalizedString("Hello!", comment: ""),
-            message: NSLocalizedString("congratulations", comment: ""),
-            preferredStyle: .alert)
-        
-        //show
-        let action = UIAlertAction(title : "OK", style: .cancel, handler: nil)
-        
-        dialog.addAction(action)
-        present(dialog, animated: true, completion: nil)
-    }
+
 }
+
