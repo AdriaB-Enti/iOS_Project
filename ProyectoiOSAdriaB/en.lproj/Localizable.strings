@@ -8,3 +8,13 @@
 
 "Hello!" = "Hello!";
 "congratulations" = "Congratulations!";
+
+"BackButton" = "Back";
+"PlayButton" = "Play";
+"AboutButton" = "About";
+
+"EasyDifficulty" = "Easy";
+"MediumDifficulty" = "Medium";
+"HardDifficulty" = "Hard";
+
+"Score" = "Score"

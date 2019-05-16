@@ -8,3 +8,13 @@
 
 "Hello!" = "Hola!";
 "congratulations" = "Felicitats!";
+
+"BackButton" = "Enrere";
+"PlayButton" = "Jugar";
+"AboutButton" = "Sobre";
+
+"EasyDifficulty" = "Fàcil";
+"MediumDifficulty" = "Mitjà";
+"HardDifficulty" = "Dificil";
+
+"Score" = "Punts"

@@ -14,6 +14,13 @@ class FirestoreRepository {
     
     let K_COLLECTION_SCORES = "scores"
     
+    func loginPlayer(user: String, password: String){
+        print("login")
+        //Auth.auth().signIn(withCustomToken: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
+        //Auth.auth().create
+        
+    }
+    
     func writeUserScore(score: Int, username: String?){
         let db = Firestore.firestore()
         //db.collection(K_COLLECTION_SCORES).addDocument(data: ["score":3, "username":"Adria"])

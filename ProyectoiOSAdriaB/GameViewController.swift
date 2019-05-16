@@ -14,7 +14,8 @@ import GoogleMobileAds
 import CoreLocation
 import UserNotifications
 
-class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate, GADBannerViewDelegate {
+class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate,
+GADBannerViewDelegate, LoginDelegate {
     
     let locationManager = CLLocationManager()
     let notificationCenter = UNUserNotificationCenter.current()
@@ -44,10 +45,10 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             //let scene = MenuScene(size: view.frame.size)
-            let scene = LoginScene(size: view.frame.size)
+            let scene = MenuScene(size: view.frame.size)
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
-            //scene.menuDelegate = self
+            scene.menuDelegate = self
             
             // Present the scene
             view.presentScene(scene)
@@ -160,12 +161,22 @@ class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegat
     
     func goToGame(sender: MenuScene, level:Level) {
         if let view = self.view as? SKView{
-            deleteBanner()
+            //deleteBanner()
+            print("going to game")
             let scene = GameScene(size: view.frame.size)
             scene.startDif = level
             scene.scaleMode = .aspectFill
             scene.gameDelegate = self
             view.presentScene(scene, transition: .fade(withDuration: 0.3))
+        }
+    }
+    
+    func goToMenu(sender: LoginScene) {
+        if let view = self.view as? SKView{
+            let scene = MenuScene(size: view.frame.size)
+            scene.menuDelegate = self
+            scene.scaleMode = .aspectFill
+            view.presentScene(scene, transition: .reveal(with: .right, duration: 0.3))
         }
     }
     

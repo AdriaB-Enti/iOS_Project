@@ -9,5 +9,6 @@ target 'ProyectoiOSAdriaB' do
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/AdMob'
+pod 'Firebase/Auth'
 
 end

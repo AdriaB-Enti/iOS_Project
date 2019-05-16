@@ -11,6 +11,10 @@ import SpriteKit
 import GameplayKit
 import CoreLocation
 
+protocol LoginDelegate: class {
+    func goToMenu(sender: LoginScene)
+}
+
 class LoginScene: SKScene, ButtonDelegate {
     
     private var labelUsername : SKLabelNode?
@@ -20,6 +24,7 @@ class LoginScene: SKScene, ButtonDelegate {
     private var loginButton = Button(rect: CGRect(x: 0, y: 0, width: 150, height: 70), cornerRadius: 15)
     private var registerButton = Button(rect: CGRect(x: 0, y: 0, width: 150, height: 70), cornerRadius: 15)
     
+    weak var loginDelegate: LoginDelegate?
     //TODO: ADD username and password text input, button to login
     //Then add implementation of that
     
@@ -106,10 +111,11 @@ class LoginScene: SKScene, ButtonDelegate {
     }
     
     func onTap(sender: Button) {
-        
-        
+        var fr = FirestoreRepository()
+        fr.loginPlayer(user: "hello",password: "pass")
         
     }
+    
     
     
 }

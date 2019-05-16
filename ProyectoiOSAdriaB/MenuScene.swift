@@ -42,7 +42,7 @@ class MenuScene: SKScene, ButtonDelegate {
         startButton.position = CGPoint(x: (view.frame.width/2.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
         startButton.isUserInteractionEnabled = true  //activate events
         startButton.delegate = self
-        startButton.setText(text: "Play")
+        startButton.setText(text: NSLocalizedString("PlayButton", comment: "play button"))
         startButton.setTextColor(color: .black)
         addChild(startButton)
         
@@ -57,7 +57,7 @@ class MenuScene: SKScene, ButtonDelegate {
         aboutButton.position = CGPoint(x: (view.frame.width/2.0) - aboutButton.frame.width/2.0, y: (view.frame.height / 5.5) - aboutButton.frame.height/2.0)
         aboutButton.isUserInteractionEnabled = true
         aboutButton.delegate = self
-        aboutButton.setText(text: "About")
+        aboutButton.setText(text: NSLocalizedString("AboutButton", comment: "about button"))
         aboutButton.setTextColor(color: .black)
         addChild(aboutButton)
         
@@ -88,7 +88,7 @@ class MenuScene: SKScene, ButtonDelegate {
         easyButton.fillColor = UIColor(named: "SecondOrange")!
         easyButton.isUserInteractionEnabled = true
         easyButton.delegate = self
-        easyButton.setText(text: "Easy")
+        easyButton.setText(text: NSLocalizedString("EasyDifficulty", comment: "easy button"))
         easyButton.setTextColor(color: .black)
         easyButton.setTextSize(newSize: 25)
         addChild(easyButton)
@@ -98,7 +98,7 @@ class MenuScene: SKScene, ButtonDelegate {
         mediumButton.fillColor = .white
         mediumButton.isUserInteractionEnabled = true
         mediumButton.delegate = self
-        mediumButton.setText(text: "Medium")
+        mediumButton.setText(text: NSLocalizedString("MediumDifficulty", comment: "medium button"))
         mediumButton.setTextColor(color: .black)
         mediumButton.setTextSize(newSize: 25)
         addChild(mediumButton)
@@ -108,7 +108,7 @@ class MenuScene: SKScene, ButtonDelegate {
         hardButton.fillColor = .white
         hardButton.isUserInteractionEnabled = true
         hardButton.delegate = self
-        hardButton.setText(text: "Hard")
+        hardButton.setText(text: NSLocalizedString("HardDifficulty", comment: "hard button"))
         hardButton.setTextColor(color: .black)
         hardButton.setTextSize(newSize: 25)
         addChild(hardButton)
@@ -153,6 +153,7 @@ class MenuScene: SKScene, ButtonDelegate {
     
     func onTap(sender: Button) {
         if(sender == startButton){
+            print("calling delegate")
             menuDelegate?.goToGame(sender: self, level: selectedDif)
         }
         /*if(sender == optionsButton){
