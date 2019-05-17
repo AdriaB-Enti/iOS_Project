@@ -161,7 +161,7 @@ GADBannerViewDelegate, LoginDelegate {
     
     func goToGame(sender: MenuScene, level:Level) {
         if let view = self.view as? SKView{
-            //deleteBanner()
+            deleteBanner()
             print("going to game")
             let scene = GameScene(size: view.frame.size)
             scene.startDif = level

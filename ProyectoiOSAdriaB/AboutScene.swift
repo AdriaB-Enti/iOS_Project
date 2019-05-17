@@ -26,7 +26,7 @@ class AboutScene: SKScene, ButtonDelegate {
         
         self.label = SKLabelNode(fontNamed: "HeroesLegend")
         if let label = self.label{
-            label.text = "About"
+            label.text = NSLocalizedString("AboutButton", comment: "about")
             label.color = SKColor.yellow
             label.position = CGPoint(x: (view.frame.width/2.0), y: (4*view.frame.height / 5.0))
             addChild(label)
@@ -36,12 +36,12 @@ class AboutScene: SKScene, ButtonDelegate {
         backButton.position = CGPoint(x: (view.frame.width/2.0) - backButton.frame.width/2.0, y: (view.frame.height / 5.0) - backButton.frame.height/2.0)
         backButton.isUserInteractionEnabled = true  //activate events
         backButton.delegate = self
-        backButton.setText(text: "Back")
+        backButton.setText(text: NSLocalizedString("BackButton", comment: "back"))
         backButton.setTextColor(color: .white)
         addChild(backButton)
         
         let madeby = SKLabelNode()
-        madeby.text = "A Game made by Adrià Biarnés"
+        madeby.text = NSLocalizedString("CreatedBy", comment: "createdby")
         madeby.color = SKColor.yellow
         madeby.position = CGPoint(x: (view.frame.width/2.0), y: (view.frame.height / 2.0))
         addChild(madeby)

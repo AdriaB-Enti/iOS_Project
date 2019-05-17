@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  ProyectoiOSAdriaB
+
+  Created by Entipro on 2019/5/9.
+  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
+*/
+
+"Hello!" = "Hola!";
+"congratulations" = "Felicidades!";
+
+"BackButton" = "Atrás";
+"PlayButton" = "Jugar";
+"AboutButton" = "Acerca de";
+
+"EasyDifficulty" = "Fácil";
+"MediumDifficulty" = "Medio";
+"HardDifficulty" = "Difícil";
+
+"Score" = "Puntos";
+"NextLevel" = "Siguiente nivel";
+"Win" = "Has ganado!";
+"CreatedBy" = "Juego hecho por Adrià Biarnés";
+"Lose" = "Has perdido!";

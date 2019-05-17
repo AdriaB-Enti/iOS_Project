@@ -17,4 +17,8 @@
 "MediumDifficulty" = "Mitjà";
 "HardDifficulty" = "Dificil";
 
-"Score" = "Punts"
+"Score" = "Punts";
+"NextLevel" = "Següent nivell";
+"Win" = "Has guanyat!";
+"CreatedBy" = "Joc creat per Adrià Biarnés";
+"Lose" = "Has perdut!";

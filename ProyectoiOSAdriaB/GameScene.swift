@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 protocol GameSceneDelegate: class {
     func goToMenu(sender: GameScene)
@@ -23,6 +24,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var cardSprites = [CardSprite]()
     private var cardtest = CardSprite()
     private var mainMenuB = Button(rect: CGRect(x: 0, y: 0, width: 60, height: 40), cornerRadius: 15)
+    private var musicPlayer: AVAudioPlayer?
     var nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 140, height: 60), cornerRadius: 5)
     
     public var startDif = Level.easy
@@ -44,9 +46,23 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         print("width is \(view.frame.width)")
         print("height is \(view.frame.height)")
         
+        /*let backgroundMusic = SKAudioNode(fileNamed: "Staying_Positive.mp3")
+        self.addChild(backgroundMusic)
+        backgroundMusic.run(SKAction.play())
+        */
         
+        let path = Bundle.main.path(forResource: "Staying_Positive", ofType:"mp3")!
+        let url = URL(fileURLWithPath: path)
         
-        nextLevelButton.setText(text: "Next Level")
+        do {
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+            musicPlayer?.play()
+        } catch {
+            print("Error: couldn't load the music")
+        }
+ 
+ 
+        nextLevelButton.setText(text: NSLocalizedString("NextLevel", comment: "NextLevel"))
         nextLevelButton.delegate = self
         
         /*
@@ -63,7 +79,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         //mainMenuB.position.y = CGFloat(view.frame.height)*0.9
         mainMenuB.fillColor = UIColor(cgColor: SKColor.gray.cgColor)
         mainMenuB.position = CGPoint(x: 18.0, y: Double(view.frame.height)-45.0) //NOPE
-        mainMenuB.setText(text: "BACK")
+        mainMenuB.setText(text: NSLocalizedString("BackButton", comment: "back button"))
         mainMenuB.setTextSize(newSize: 11)
         mainMenuB.isUserInteractionEnabled = true
         mainMenuB.delegate = self
@@ -88,7 +104,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
                 self.removeAction(forKey: "countdown")
                 self.gameLogic.gameFinished = true
                 
-                let labelLose = SKLabelNode(text: "You Lose!")
+                let labelLose = SKLabelNode(text: NSLocalizedString("Lose", comment: "lose message"))
                 labelLose.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height/2)
                 labelLose.fontColor = .white
                 labelLose.fontSize = 35
@@ -99,7 +115,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         let sequence = SKAction.sequence([SKAction.wait(forDuration: 1.0),updateTimerBlock])
         run(SKAction.repeatForever(sequence), withKey: "countdown")
         
-        labelPoints = SKLabelNode(text: "Score: 0")
+        labelPoints = SKLabelNode(text: NSLocalizedString("Score", comment: "score")+": 0")
         labelPoints?.fontName = "HeroesLegend"
         labelPoints?.fontSize = 19
         labelPoints?.position = CGPoint(x: Double(view.frame.width)*0.70, y: Double(view.frame.height)*0.93)
@@ -163,6 +179,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
                 addChild(cardSprites.last!)
             }
         }
+        
     }
     
     func formatTimeSeconds(seconds:Double) -> String{
@@ -207,16 +224,20 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     }
     
     func onCardTap(sender: CardSprite) {
-        gameLogic.selectCard(cardInd: sender.cardID)
-        print("card \(sender.cardID)pressed")
+        if(!gameLogic.gameFinished){
+            gameLogic.selectCard(cardInd: sender.cardID)
+            print("card \(sender.cardID)pressed")
+        }
     }
     
     func onTap(sender: Button) {
         if(sender == mainMenuB){
+            musicPlayer?.stop()
             removeAction(forKey: "countdown")
             gameDelegate?.goToMenu(sender: self)
         }
         if(sender == nextLevelButton){
+            musicPlayer?.stop()
             //fer el mateix que el goToGame
             if(startDif == Level.easy){
                 gameDelegate?.goToNextLevel(sender: self, level: Level.medium)
@@ -247,22 +268,23 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     }
     
     func gameFinished(win: Bool) {
+        musicPlayer?.stop()
         print("gameFinished------------------------")
         removeAction(forKey: "countdown")
         if(win){
-            let labelWin = SKLabelNode(text: "You Won!")
+            let labelWin = SKLabelNode(text: NSLocalizedString("Win", comment: "win message"))
             labelWin.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height/2)
             labelWin.fontColor = .white
             labelWin.fontSize = 35
             labelWin.fontName = "HeroesLegend"
             addChild(labelWin)
 
-            if(startDif == Level.hard){
+            if(startDif != Level.hard){
                 nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 190, height: 60), cornerRadius: 5)
-                nextLevelButton.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height * 0.3)
+                nextLevelButton.position = CGPoint(x: (self.view!.frame.width/2)-190/2, y: self.view!.frame.height * 0.3)
                 nextLevelButton.fillColor = UIColor(named: "myOrange")!
                 nextLevelButton.delegate = self
-                nextLevelButton.setText(text: "Next level")
+                nextLevelButton.setText(text: NSLocalizedString("NextLevel", comment: "NextLevel"))
                 nextLevelButton.isUserInteractionEnabled = true
                 nextLevelButton.setTextSize(newSize: 15)
                 addChild(nextLevelButton)
@@ -290,8 +312,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     
     func pointsAdded(totalPoints:Int) {
         //canviar el text de la labe de points amb els nous
-        labelPoints?.text = "Score: \(totalPoints)"
+        labelPoints?.text = NSLocalizedString("Score", comment: "score")+": \(totalPoints)"
         print("points in game scene!!")
-        
     }
 }
