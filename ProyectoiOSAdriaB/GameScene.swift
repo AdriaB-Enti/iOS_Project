@@ -25,6 +25,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     private var cardtest = CardSprite()
     private var mainMenuB = Button(rect: CGRect(x: 0, y: 0, width: 60, height: 40), cornerRadius: 15)
     private var musicPlayer: AVAudioPlayer?
+    private var victorySound: AVAudioPlayer?
     var nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 140, height: 60), cornerRadius: 5)
     
     public var startDif = Level.easy
@@ -46,14 +47,9 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         print("width is \(view.frame.width)")
         print("height is \(view.frame.height)")
         
-        /*let backgroundMusic = SKAudioNode(fileNamed: "Staying_Positive.mp3")
-        self.addChild(backgroundMusic)
-        backgroundMusic.run(SKAction.play())
-        */
-        
+        //MUSIC
         let path = Bundle.main.path(forResource: "Staying_Positive", ofType:"mp3")!
         let url = URL(fileURLWithPath: path)
-        
         do {
             musicPlayer = try AVAudioPlayer(contentsOf: url)
             musicPlayer?.play()
@@ -272,6 +268,14 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         print("gameFinished------------------------")
         removeAction(forKey: "countdown")
         if(win){
+            let path = Bundle.main.path(forResource: "victory", ofType:"aiff")!
+            do {
+                victorySound = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                victorySound?.play()
+            } catch {
+                print("Error: couldn't load victory sound")
+            }
+            
             let labelWin = SKLabelNode(text: NSLocalizedString("Win", comment: "win message"))
             labelWin.position = CGPoint(x: self.view!.frame.width/2, y: self.view!.frame.height/2)
             labelWin.fontColor = .white

@@ -28,7 +28,8 @@
 		BC5380CE2271E1810021CD66 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CD2271E1810021CD66 /* FirestoreRepository.swift */; };
 		BC5380D02271ECB20021CD66 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5380CF2271ECB20021CD66 /* Preferences.swift */; };
 		BC5C20ED228EE693009C9CF9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C20EC228EE693009C9CF9 /* AVFoundation.framework */; };
-		BC5C20F0228EE760009C9CF9 /* Staying_Positive.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC5C20EF228EE760009C9CF9 /* Staying_Positive.mp3 */; };
+		BC5C20F2228EEB10009C9CF9 /* victory.aiff in Resources */ = {isa = PBXBuildFile; fileRef = BC5C20F1228EEB10009C9CF9 /* victory.aiff */; };
+		BC5C20F4228EEB4D009C9CF9 /* Staying_Positive.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC5C20F3228EEB4D009C9CF9 /* Staying_Positive.mp3 */; };
 		BC5CA152227C690F004FCFC1 /* loginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5CA151227C690F004FCFC1 /* loginScene.swift */; };
 		BC762FF022845AA4005648F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC762FF222845AA4005648F9 /* Localizable.strings */; };
 		BC762FF822845E48005648F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC762FFA22845E48005648F9 /* InfoPlist.strings */; };
@@ -62,7 +63,8 @@
 		BC5C20EA228EDD5E009C9CF9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC5C20EB228EDD5E009C9CF9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BC5C20EC228EE693009C9CF9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		BC5C20EF228EE760009C9CF9 /* Staying_Positive.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Staying_Positive.mp3; path = ../../../../../Downloads/Staying_Positive.mp3; sourceTree = "<group>"; };
+		BC5C20F1228EEB10009C9CF9 /* victory.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = victory.aiff; sourceTree = "<group>"; };
+		BC5C20F3228EEB4D009C9CF9 /* Staying_Positive.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Staying_Positive.mp3; sourceTree = "<group>"; };
 		BC5CA151227C690F004FCFC1 /* loginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginScene.swift; sourceTree = "<group>"; };
 		BC762FEC2284575B005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Main.strings; sourceTree = "<group>"; };
 		BC762FED2284575B005648F9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -155,7 +157,8 @@
 		BC5C20EE228EE74D009C9CF9 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				BC5C20EF228EE760009C9CF9 /* Staying_Positive.mp3 */,
+				BC5C20F3228EEB4D009C9CF9 /* Staying_Positive.mp3 */,
+				BC5C20F1228EEB10009C9CF9 /* victory.aiff */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC5C20F2228EEB10009C9CF9 /* victory.aiff in Resources */,
 				6295D534223BD61000E9AE81 /* Heroes Legend Hollow.ttf in Resources */,
 				BC5380CC2271DD350021CD66 /* GoogleService-Info.plist in Resources */,
 				62E0323022296E2A0021BD63 /* Main.storyboard in Resources */,
@@ -229,10 +233,10 @@
 				BC762FF022845AA4005648F9 /* Localizable.strings in Resources */,
 				62E0322722296E290021BD63 /* GameScene.sks in Resources */,
 				62E0323222296E2D0021BD63 /* Assets.xcassets in Resources */,
-				BC5C20F0228EE760009C9CF9 /* Staying_Positive.mp3 in Resources */,
 				62E0323522296E2D0021BD63 /* LaunchScreen.storyboard in Resources */,
 				62E0322922296E2A0021BD63 /* Actions.sks in Resources */,
 				BC762FF822845E48005648F9 /* InfoPlist.strings in Resources */,
+				BC5C20F4228EEB4D009C9CF9 /* Staying_Positive.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
