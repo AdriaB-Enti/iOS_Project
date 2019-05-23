@@ -27,7 +27,7 @@ class MenuScene: SKScene, ButtonDelegate {
     
     //private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
 
-    private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 230, height: 80), cornerRadius: 15)
+    private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 280, height: 80), cornerRadius: 15)
     let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
