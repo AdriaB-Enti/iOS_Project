@@ -31,6 +31,9 @@ class MenuScene: SKScene, ButtonDelegate {
     let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
+    var soundButton = ImageButton(rect: CGRect(x: 0, y: 0, width: 80, height: 80), cornerRadius: 25)
+    
+    
     
     var selectedDif = Level.easy
     
@@ -45,6 +48,14 @@ class MenuScene: SKScene, ButtonDelegate {
         startButton.setText(text: NSLocalizedString("PlayButton", comment: "play button"))
         startButton.setTextColor(color: .black)
         addChild(startButton)
+        
+        soundButton.setImage(image: "sound_icon")
+        soundButton.isUserInteractionEnabled = true
+        soundButton.delegate = self
+        soundButton.position = CGPoint(x: (view.frame.width/5.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
+        addChild(soundButton)
+        
+        
         
         /*optionsButton.fillColor = UIColor(named: "myGray")!
         optionsButton.position = CGPoint(x: (8.75*view.frame.width/10.0) - optionsButton.frame.width/2.0, y: (9.5*view.frame.height / 10.0) - optionsButton.frame.height/2.0)

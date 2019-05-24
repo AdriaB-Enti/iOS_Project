@@ -61,7 +61,6 @@ class Button: SKShapeNode{
             }
         //}
         
-        
         //check if the user still has the finger inside the button
         if let touch = touches.first, let parent = parent {
             if frame.contains(touch.location(in: parent)){
