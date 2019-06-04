@@ -53,7 +53,7 @@ class MenuScene: SKScene, ButtonDelegate {
         setAudioButtonImage(musicEnabled: Preferences().getMusicEnabled())
         audioButton.isUserInteractionEnabled = true
         audioButton.delegate = self
-        audioButton.position = CGPoint(x: (view.frame.width/5.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
+        audioButton.position = CGPoint(x: (audioButton.buttonImage?.size.width ?? 200)/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.5)
         addChild(audioButton)
         
         
