@@ -13,6 +13,7 @@ class ImageButton: Button{
     var buttonImage: SKSpriteNode?
     
     func setImage(image: String){
+        buttonImage?.removeFromParent()
         buttonImage = SKSpriteNode(imageNamed: image)
         if let button = buttonImage{
             button.size = CGSize(width: self.frame.width, height: self.frame.height)

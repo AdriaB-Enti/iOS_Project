@@ -23,8 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter.delegate = self
         
         //Firebase
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-5239650848411986~2740916784")
-        return true 
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        //GADMobileAds.configure(withApplicationID: "ca-app-pub-5239650848411986~2740916784")
+        
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

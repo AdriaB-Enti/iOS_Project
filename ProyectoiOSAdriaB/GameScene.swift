@@ -50,14 +50,16 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         //MUSIC
         let path = Bundle.main.path(forResource: "Staying_Positive", ofType:"mp3")!
         let url = URL(fileURLWithPath: path)
-        do {
-            musicPlayer = try AVAudioPlayer(contentsOf: url)
-            musicPlayer?.play()
-        } catch {
-            print("Error: couldn't load the music")
+        
+        if(Preferences().getMusicEnabled()){
+            do {
+                musicPlayer = try AVAudioPlayer(contentsOf: url)
+                musicPlayer?.play()
+            } catch {
+                print("Error: couldn't load the music")
+            }
         }
- 
- 
+        
         nextLevelButton.setText(text: NSLocalizedString("NextLevel", comment: "NextLevel"))
         nextLevelButton.delegate = self
         
@@ -269,11 +271,13 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         removeAction(forKey: "countdown")
         if(win){
             let path = Bundle.main.path(forResource: "victory", ofType:"aiff")!
-            do {
-                victorySound = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                victorySound?.play()
-            } catch {
-                print("Error: couldn't load victory sound")
+            if(Preferences().getMusicEnabled()){
+                do {
+                    victorySound = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                    victorySound?.play()
+                } catch {
+                    print("Error: couldn't load victory sound")
+                }
             }
             
             let labelWin = SKLabelNode(text: NSLocalizedString("Win", comment: "win message"))

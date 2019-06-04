@@ -25,4 +25,36 @@ class Preferences {
         return userId
         //4CB1EA65-4DE9-4F56-AAB1-522B90A13A77
     }
+    
+    //Music
+    func getMusicEnabled()-> Bool{
+        let defaults = UserDefaults.standard
+        
+        let musicEnabled = defaults.bool(forKey: "musicEnabled")
+        
+        return musicEnabled
+    }
+    
+    func toggleMusic(){
+        let defaults = UserDefaults.standard
+        let musicEnabled = defaults.bool(forKey: "musicEnabled")
+        defaults.set(!musicEnabled,forKey: "musicEnabled" )
+    }
+    
+    func setMusicEnabled(isEnabled:Bool){
+        let defaults = UserDefaults.standard
+        defaults.set(isEnabled,forKey: "musicEnabled" )
+    }
+    
+    func setDefaultLevel(level:Level){
+        UserDefaults.standard.set(level.rawValue, forKey: "level")
+    }
+    
+    func getDefaultLevel()->Level{
+        let defaults = UserDefaults.standard
+        let level:Level = Level(rawValue:(defaults.integer(forKey: "level"))) ?? Level.easy
+        
+        return level
+    }
+    
 }

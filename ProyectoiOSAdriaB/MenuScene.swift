@@ -31,7 +31,7 @@ class MenuScene: SKScene, ButtonDelegate {
     let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
-    var soundButton = ImageButton(rect: CGRect(x: 0, y: 0, width: 80, height: 80), cornerRadius: 25)
+    var audioButton = ImageButton(rect: CGRect(x: 0, y: 0, width: 80, height: 80), cornerRadius: 25)
     
     
     
@@ -49,11 +49,18 @@ class MenuScene: SKScene, ButtonDelegate {
         startButton.setTextColor(color: .black)
         addChild(startButton)
         
-        soundButton.setImage(image: "sound_icon")
-        soundButton.isUserInteractionEnabled = true
-        soundButton.delegate = self
-        soundButton.position = CGPoint(x: (view.frame.width/5.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
-        addChild(soundButton)
+        //audioButton.setImage(image: "sound_icon")
+        setAudioButtonImage(musicEnabled: Preferences().getMusicEnabled())
+        audioButton.isUserInteractionEnabled = true
+        audioButton.delegate = self
+        audioButton.position = CGPoint(x: (view.frame.width/5.0) - startButton.frame.width/2.0, y: (1.35*view.frame.height / 3.0) - startButton.frame.height/2.0)
+        addChild(audioButton)
+        
+        
+        //print("preferences: \(Preferences().getMusicEnabled())")
+        //Preferences().setMusicEnabled(isEnabled: true)
+        //print("CHANGED PREF: \(Preferences().getMusicEnabled())")
+        //print("TEST TEST: \(Preferences().test())")
         
         
         
@@ -124,6 +131,15 @@ class MenuScene: SKScene, ButtonDelegate {
         hardButton.setTextSize(newSize: 25)
         addChild(hardButton)
         
+        setDifButton(currentDif: Preferences().getDefaultLevel())
+    }
+    
+    func setAudioButtonImage(musicEnabled:Bool){
+        if(musicEnabled){
+            audioButton.setImage(image: "sound_icon")
+        } else{
+            audioButton.setImage(image: "sound_disabled_icon")
+        }
     }
     
     
@@ -162,7 +178,35 @@ class MenuScene: SKScene, ButtonDelegate {
         
     }
     
+    func setDifButton(currentDif:Level){
+        
+        switch currentDif {
+            
+        case Level.easy:
+            easyButton.fillColor = UIColor(named: "SecondOrange")!
+            mediumButton.fillColor = .white
+            hardButton.fillColor = .white
+            
+        case Level.medium:
+            easyButton.fillColor = .white
+            mediumButton.fillColor = UIColor(named: "SecondOrange")!
+            hardButton.fillColor = .white
+            
+        case Level.hard:
+            easyButton.fillColor = .white
+            mediumButton.fillColor = .white
+            hardButton.fillColor = UIColor(named: "SecondOrange")!
+        }
+        
+        selectedDif = currentDif
+        Preferences().setDefaultLevel(level:currentDif)
+    }
+    
     func onTap(sender: Button) {
+        if(sender == audioButton){
+            Preferences().toggleMusic()
+            setAudioButtonImage(musicEnabled: Preferences().getMusicEnabled())
+        }
         if(sender == startButton){
             print("calling delegate")
             menuDelegate?.goToGame(sender: self, level: selectedDif)
@@ -176,22 +220,13 @@ class MenuScene: SKScene, ButtonDelegate {
         }
         
         if(sender == easyButton){
-            selectedDif = Level.easy
-            easyButton.fillColor = UIColor(named: "SecondOrange")!
-            mediumButton.fillColor = .white
-            hardButton.fillColor = .white
+            setDifButton(currentDif: Level.easy)
         }
         if(sender == mediumButton){
-            selectedDif = Level.medium
-            easyButton.fillColor = .white
-            mediumButton.fillColor = UIColor(named: "SecondOrange")!
-            hardButton.fillColor = .white
+            setDifButton(currentDif: Level.medium)
         }
         if(sender == hardButton){
-            selectedDif = Level.hard
-            easyButton.fillColor = .white
-            mediumButton.fillColor = .white
-            hardButton.fillColor = UIColor(named: "SecondOrange")!
+            setDifButton(currentDif: Level.hard)
         }
     }
 }
