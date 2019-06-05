@@ -57,4 +57,13 @@ class Preferences {
         return level
     }
     
+    func saveUserName(name:String){
+        let defaults = UserDefaults.standard
+        defaults.set(name, forKey: "username")
+    }
+    
+    func getUsername()->String{
+        return UserDefaults.standard.string(forKey: "username") ?? "usernamNotSet"
+    }
+    
 }

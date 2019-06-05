@@ -45,13 +45,23 @@ GADBannerViewDelegate, LoginDelegate {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             //let scene = MenuScene(size: view.frame.size)
-            let scene = MenuScene(size: view.frame.size)
-            // Set the scale mode to scale to fit the window
-            scene.scaleMode = .aspectFill
-            scene.menuDelegate = self
             
-            // Present the scene
-            view.presentScene(scene)
+            if(Preferences().getUsername() == "usernamNotSet"){
+                let scene = LoginScene(size: view.frame.size)
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                scene.loginDelegate = self
+                // Present the scene
+                view.presentScene(scene)
+            } else{
+                print("Username is \(Preferences().getUsername())")
+                let scene = MenuScene(size: view.frame.size)
+                scene.scaleMode = .aspectFill
+                scene.menuDelegate = self
+                view.presentScene(scene)
+            }
+            
+            
             
             //view.showsFPS = true
             //view.showsNodeCount = true
@@ -173,6 +183,7 @@ GADBannerViewDelegate, LoginDelegate {
     
     func goToMenu(sender: LoginScene) {
         if let view = self.view as? SKView{
+            
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
             scene.scaleMode = .aspectFill

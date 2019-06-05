@@ -51,6 +51,8 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         let path = Bundle.main.path(forResource: "Staying_Positive", ofType:"mp3")!
         let url = URL(fileURLWithPath: path)
         
+        self.backgroundColor = UIColor(named: "gameplayColor")!
+        
         if(Preferences().getMusicEnabled()){
             do {
                 musicPlayer = try AVAudioPlayer(contentsOf: url)
@@ -286,7 +288,9 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
             labelWin.fontSize = 35
             labelWin.fontName = "HeroesLegend"
             addChild(labelWin)
-
+            
+            FirestoreRepository().writeUserScore(score: gameLogic.points, username: Preferences().getUsername())
+            
             if(startDif != Level.hard){
                 nextLevelButton = Button(rect: CGRect(x: 0, y: 0, width: 190, height: 60), cornerRadius: 5)
                 nextLevelButton.position = CGPoint(x: (self.view!.frame.width/2)-190/2, y: self.view!.frame.height * 0.3)

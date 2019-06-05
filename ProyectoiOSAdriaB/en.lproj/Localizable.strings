@@ -22,3 +22,7 @@
 "Win" = "You Won!";
 "CreatedBy" = "A Game made by: Adrià Biarnés";
 "Lose" = "You lose!";
+"Username" = "Username";
+"Register" = "Start";
+"NoUsername" = "Username can't be empty";
+"UsernameShort" = "Username needs to be at least 4 characters long";
