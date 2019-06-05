@@ -26,3 +26,4 @@
 "Register" = "Començar";
 "NoUsername" = "El nom d'usuari no pot estar buit";
 "UsernameShort" = "El nom d'usuari ha de tenir almenys 4 caràcters";
+"HighScores" = "Puntuacions";

@@ -16,15 +16,26 @@ protocol HighScoresDelegate: class {
 
 class HighScoresScene: SKScene, ButtonDelegate {
     
-    //private var labelUsername : SKLabelNode?
+    private var labelScores : SKLabelNode?
     private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 220, height: 70), cornerRadius: 15)
     
     
-    weak var loginDelegate: LoginDelegate?
+    weak var scoresDelegate: HighScoresDelegate?
     
     //weak var loginDelegate:LoginSceneDelegate?
     
     override func didMove(to view: SKView) {
+        
+        self.labelScores = SKLabelNode(text:NSLocalizedString("HighScores", comment: "High scores title"))
+        
+        if let label = self.labelScores {
+            addChild(label)
+            label.fontName = "HeroesLegend"
+            label.fontColor = UIColor(named: "SecondOrange")!
+            label.fontSize = 35
+            label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
+        }
+        
         
         self.backgroundColor = UIColor(named: "myBlue")!
         
@@ -71,7 +82,9 @@ class HighScoresScene: SKScene, ButtonDelegate {
     }
     
     func onTap(sender: Button) {
-        
+        if(sender == backButton){
+            scoresDelegate?.goToMenu(sender: self)
+        }
     }
     
     

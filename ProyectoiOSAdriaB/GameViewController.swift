@@ -15,8 +15,7 @@ import CoreLocation
 import UserNotifications
 
 class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate,
-GADBannerViewDelegate, LoginDelegate {
-    
+GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     let locationManager = CLLocationManager()
     let notificationCenter = UNUserNotificationCenter.current()
     
@@ -58,6 +57,9 @@ GADBannerViewDelegate, LoginDelegate {
                 let scene = MenuScene(size: view.frame.size)
                 scene.scaleMode = .aspectFill
                 scene.menuDelegate = self
+                /*let scene = HighScoresScene(size: view.frame.size)
+                scene.scaleMode = .aspectFill
+                scene.scoresDelegate = self*/
                 view.presentScene(scene)
             }
             
@@ -184,6 +186,15 @@ GADBannerViewDelegate, LoginDelegate {
     func goToMenu(sender: LoginScene) {
         if let view = self.view as? SKView{
             
+            let scene = MenuScene(size: view.frame.size)
+            scene.menuDelegate = self
+            scene.scaleMode = .aspectFill
+            view.presentScene(scene, transition: .reveal(with: .right, duration: 0.3))
+        }
+    }
+    
+    func goToMenu(sender: HighScoresScene) {
+        if let view = self.view as? SKView{
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
             scene.scaleMode = .aspectFill
