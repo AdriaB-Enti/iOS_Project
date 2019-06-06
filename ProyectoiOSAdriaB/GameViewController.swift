@@ -14,11 +14,15 @@ import GoogleMobileAds
 import CoreLocation
 import UserNotifications
 
+protocol ShakeDelegate: class {
+    func shakeRecieved()
+}
+
 class GameViewController: UIViewController, MenuSceneDelegate, AboutSceneDelegate, GameSceneDelegate,
 GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     let locationManager = CLLocationManager()
     let notificationCenter = UNUserNotificationCenter.current()
-    
+    var shakeDel:ShakeDelegate?
     var bannerView: GADBannerView!
     
     func initLocation(){
@@ -36,10 +40,9 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        super.becomeFirstResponder()
         
         addBanner()
-        
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -92,7 +95,6 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
         
     }
     
-    
     func showWelcomePopup(){
         
         notificationCenter.getNotificationSettings(completionHandler: {
@@ -138,6 +140,8 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
             }
         }
     }
+    
+    //override func canBecomee
     
     override var shouldAutorotate: Bool {
         return false
@@ -185,6 +189,7 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
             deleteBanner()
             print("going to game")
             let scene = GameScene(size: view.frame.size)
+            self.shakeDel = scene
             scene.startDif = level
             scene.scaleMode = .aspectFill
             scene.gameDelegate = self
@@ -225,6 +230,17 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     //per quan tingui forma de passar al següent nivell, podem registrar un event
     func goToNextLevel(sender:GameScene, level: Level){
         //Analytics.logEvent("nextLevel", parameters: ["levelName": level.rawValue])
+        if let view = self.view as? SKView{
+            let scene = GameScene(size: view.frame.size)
+            scene.startDif = level
+            scene.scaleMode = .aspectFill
+            scene.gameDelegate = self
+            view.presentScene(scene, transition: .fade(withDuration: 0.3))
+        }
+    }
+    
+    
+    func resetLevel(sender:GameScene, level:Level){
         if let view = self.view as? SKView{
             let scene = GameScene(size: view.frame.size)
             scene.startDif = level
@@ -309,6 +325,12 @@ extension GameViewController: CLLocationManagerDelegate {
         //print(error.localizedDescription)
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if(event?.subtype == UIEvent.EventSubtype.motionShake){
+            shakeDel?.shakeRecieved()
+            print("shake")
+        }
+    }
 
 }
 

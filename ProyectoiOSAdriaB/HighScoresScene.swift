@@ -17,6 +17,7 @@ protocol HighScoresDelegate: class {
 class HighScoresScene: SKScene, ButtonDelegate {
     
     private var labelScores : SKLabelNode?
+    private var waitingLabel : SKLabelNode?
     
     private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 120, height: 70), cornerRadius: 15)
     private var dataRecieved = false
@@ -38,6 +39,16 @@ class HighScoresScene: SKScene, ButtonDelegate {
             label.position = CGPoint(x: view.frame.width/2.0, y: 6.0 * view.frame.height / 7.0)
         }
         
+        self.waitingLabel = SKLabelNode(text:NSLocalizedString("Loading", comment: "Loading label"))
+        if let waitLabel = self.waitingLabel {
+            addChild(waitLabel)
+            waitLabel.fontName = "HeroesLegend"
+            waitLabel.fontColor = UIColor(named: "SecondOrange")!
+            waitLabel.fontSize = 25
+            waitLabel.position = CGPoint(x: view.frame.width/2.0, y: view.frame.height / 2.0)
+        }
+        
+        
         self.backgroundColor = UIColor(named: "myBlue")!
         
         backButton.fillColor = UIColor(named: "myOrange")!
@@ -52,7 +63,6 @@ class HighScoresScene: SKScene, ButtonDelegate {
         FirestoreRepository().getScores(completion: { scores in
             self.allScores = scores
             self.updateScores(v:view,theScores:scores)
-            
         })
         /*for score in allScores{
             print(score)
@@ -88,6 +98,9 @@ class HighScoresScene: SKScene, ButtonDelegate {
     }
     
     func updateScores(v:SKView, theScores:[String]){
+        
+        self.waitingLabel?.removeFromParent()
+        
         var counter = 1
         let spacing = v.frame.height/8
         for score in theScores{

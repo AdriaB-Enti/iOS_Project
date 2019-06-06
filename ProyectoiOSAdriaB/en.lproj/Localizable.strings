@@ -27,3 +27,4 @@
 "NoUsername" = "Username can't be empty";
 "UsernameShort" = "Username needs to be at least 4 characters long";
 "HighScores" = "High Scores";
+"Loading" = "Loading...";

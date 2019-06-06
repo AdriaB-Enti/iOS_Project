@@ -6,6 +6,7 @@
 //  Copyright © 2019 Adrià Biarnés Belso. All rights reserved.
 //
 
+import UIKit
 import SpriteKit
 import GameplayKit
 import AVFoundation
@@ -13,10 +14,15 @@ import AVFoundation
 protocol GameSceneDelegate: class {
     func goToMenu(sender: GameScene)
     func goToNextLevel(sender:GameScene, level:Level)
+    func resetLevel(sender:GameScene, level:Level)
 }
 
-
-class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
+class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate, ShakeDelegate {
+    
+    func shakeRecieved(){
+        gameDelegate?.resetLevel(sender: self, level: startDif)
+    }
+    
     private var labelTime : SKLabelNode?
     private var labelPoints : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -182,6 +188,7 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
         
     }
     
+    
     func formatTimeSeconds(seconds:Double) -> String{
         
         var minutes = Int(seconds) / 60
@@ -214,7 +221,6 @@ class GameScene: SKScene, CardDelegate, GameLogicDelegate, ButtonDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         //remainingTime -= currentTime

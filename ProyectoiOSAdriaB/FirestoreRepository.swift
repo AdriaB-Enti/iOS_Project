@@ -55,7 +55,6 @@ class FirestoreRepository {
         db.collection(K_COLLECTION_SCORES).document(userId).setData(["score":score, "username":username ?? "", "userId":userId], merge: true)
         
         //si no existeix el crearà, i si existeix ho actualitzarà. El merge es per mantenir qualsevol altra informació que hi havia al document
-        
     }
     
     func getUserScore(){
