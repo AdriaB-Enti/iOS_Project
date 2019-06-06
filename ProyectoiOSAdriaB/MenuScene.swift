@@ -27,9 +27,9 @@ class MenuScene: SKScene, ButtonDelegate {
     private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 300, height: 100), cornerRadius: 15)
     
     private var scoresButton = Button(rect: CGRect(x: 0, y: 0, width: 255, height: 76), cornerRadius: 15)
-    let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
-    let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
-    let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
+    let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 155, height: 60), cornerRadius: 15)
+    let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 155, height: 60), cornerRadius: 15)
+    let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 155, height: 60), cornerRadius: 15)
     var audioButton = ImageButton(rect: CGRect(x: 0, y: 0, width: 80, height: 80), cornerRadius: 25)
     
     
@@ -74,37 +74,37 @@ class MenuScene: SKScene, ButtonDelegate {
             label.fontColor = UIColor(named: "SecondOrange")!
             
             label.fontSize = 35
-            label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
+            label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.4)
         }
         
         
-        easyButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.6)
+        easyButton.position = CGPoint(x: view.frame.width * 0.75, y: (view.frame.height * 0.6) - label!.frame.height/2.0)
         easyButton.fillColor = UIColor(named: "SecondOrange")!
         easyButton.isUserInteractionEnabled = true
         easyButton.delegate = self
         easyButton.setText(text: NSLocalizedString("EasyDifficulty", comment: "easy button"))
         easyButton.setTextColor(color: .black)
-        easyButton.setTextSize(newSize: 25)
+        easyButton.setTextSize(newSize: 19)
         addChild(easyButton)
         
         
-        mediumButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.4)
+        mediumButton.position = CGPoint(x: view.frame.width * 0.75, y: view.frame.height * 0.4 - label!.frame.height/2.0)
         mediumButton.fillColor = .white
         mediumButton.isUserInteractionEnabled = true
         mediumButton.delegate = self
         mediumButton.setText(text: NSLocalizedString("MediumDifficulty", comment: "medium button"))
         mediumButton.setTextColor(color: .black)
-        mediumButton.setTextSize(newSize: 25)
+        mediumButton.setTextSize(newSize: 19)
         addChild(mediumButton)
         
         
-        hardButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.2)
+        hardButton.position = CGPoint(x: view.frame.width * 0.75, y: view.frame.height * 0.2 - label!.frame.height/2.0)
         hardButton.fillColor = .white
         hardButton.isUserInteractionEnabled = true
         hardButton.delegate = self
         hardButton.setText(text: NSLocalizedString("HardDifficulty", comment: "hard button"))
         hardButton.setTextColor(color: .black)
-        hardButton.setTextSize(newSize: 25)
+        hardButton.setTextSize(newSize: 19)
         addChild(hardButton)
         
         setDifButton(currentDif: Preferences().getDefaultLevel())

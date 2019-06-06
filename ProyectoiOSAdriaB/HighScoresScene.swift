@@ -19,7 +19,7 @@ class HighScoresScene: SKScene, ButtonDelegate {
     private var labelScores : SKLabelNode?
     private var waitingLabel : SKLabelNode?
     
-    private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 120, height: 70), cornerRadius: 15)
+    private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 105, height: 60), cornerRadius: 15)
     private var dataRecieved = false
     var allScores:Array<String> = []
     

@@ -181,6 +181,7 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
             scene.scoresDelegate = self
             scene.scaleMode = .aspectFill
             view.presentScene(scene, transition: .reveal(with: .left, duration: 0.4))
+            deleteBanner()
         }
     }
     
@@ -209,6 +210,7 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     
     func goToMenu(sender: HighScoresScene) {
         if let view = self.view as? SKView{
+            addBanner()
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
             scene.scaleMode = .aspectFill
@@ -256,17 +258,17 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
         view.addSubview(bannerView)
         view.addConstraints(
             [NSLayoutConstraint(item: bannerView,
-                                attribute: .bottom,
+                                attribute: .top,
                                 relatedBy: .equal,
-                                toItem: bottomLayoutGuide,
+                                toItem: topLayoutGuide,
                                 attribute: .top,
                                 multiplier: 1,
                                 constant: 0),
              NSLayoutConstraint(item: bannerView,
-                                attribute: .left,
+                                attribute: .centerX,
                                 relatedBy: .equal,
                                 toItem: view,
-                                attribute: .left,
+                                attribute: .centerX,
                                 multiplier: 1,
                                 constant: 0)
             ])
