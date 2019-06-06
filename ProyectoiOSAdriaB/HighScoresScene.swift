@@ -17,8 +17,10 @@ protocol HighScoresDelegate: class {
 class HighScoresScene: SKScene, ButtonDelegate {
     
     private var labelScores : SKLabelNode?
-    private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 220, height: 70), cornerRadius: 15)
     
+    private var backButton = Button(rect: CGRect(x: 0, y: 0, width: 120, height: 70), cornerRadius: 15)
+    private var dataRecieved = false
+    var allScores:Array<String> = []
     
     weak var scoresDelegate: HighScoresDelegate?
     
@@ -33,19 +35,28 @@ class HighScoresScene: SKScene, ButtonDelegate {
             label.fontName = "HeroesLegend"
             label.fontColor = UIColor(named: "SecondOrange")!
             label.fontSize = 35
-            label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
+            label.position = CGPoint(x: view.frame.width/2.0, y: 6.0 * view.frame.height / 7.0)
         }
         
         self.backgroundColor = UIColor(named: "myBlue")!
         
         backButton.fillColor = UIColor(named: "myOrange")!
         backButton.setTextColor(color: .black)
-        backButton.position = CGPoint(x: (view.frame.width/2.0) - backButton.frame.width/2.0, y: (view.frame.height / 3.0) - backButton.frame.height/2.0)
+        backButton.position = CGPoint(x: 0, y: view.frame.height - backButton.frame.height)
         backButton.setText(text: NSLocalizedString("BackButton", comment: "back button"))
         backButton.setTextSize(newSize: 18)
         backButton.delegate = self
         backButton.isUserInteractionEnabled = true
         addChild(backButton)
+       
+        FirestoreRepository().getScores(completion: { scores in
+            self.allScores = scores
+            self.updateScores(v:view,theScores:scores)
+            
+        })
+        /*for score in allScores{
+            print(score)
+        }*/
         
       }
     
@@ -76,8 +87,27 @@ class HighScoresScene: SKScene, ButtonDelegate {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
+    func updateScores(v:SKView, theScores:[String]){
+        var counter = 1
+        let spacing = v.frame.height/8
+        for score in theScores{
+            let aScore = SKLabelNode(text:score)
+            aScore.fontName = "HeroesLegend"
+            aScore.fontColor = UIColor(named: "SecondOrange")!
+            aScore.fontSize = 15
+            
+            
+            
+            aScore.position = CGPoint(x: v.frame.width/2.0, y: labelScores!.position.y - spacing * CGFloat(counter))
+            self.addChild(aScore)
+            counter += 1
+        }
+    }
+    
     
     override func update(_ currentTime: TimeInterval) {
+        
+        
     }
     
     func onTap(sender: Button) {

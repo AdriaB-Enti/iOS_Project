@@ -29,6 +29,26 @@ class FirestoreRepository {
         db.collection(K_COLLECTION_SCORES).addDocument(data: ["score":score, "username":username ?? "", "userId":userId])
     }
     
+    func getScores(completion: @escaping([String])->(Void)){
+        var scores: Array<String> = Array()
+        let db = Firestore.firestore()
+        
+        db.collection("scores").order(by: "score", descending: true).limit(to: 6)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let username = document.get("username") ?? "no-username"
+                        let currentScore = document.get("score") ?? "no-score"
+                        scores.append("\(username) : \(currentScore)")
+                    }
+                    
+                    completion(scores)
+                }
+        }
+    }
+    
     func updateUserScore(score: Int, username: String?){
         let db = Firestore.firestore()
         let userId = Preferences().getUserID()
@@ -53,5 +73,4 @@ class FirestoreRepository {
         db.collection(K_COLLECTION_SCORES).document().delete()
         
     }
-    
 }
