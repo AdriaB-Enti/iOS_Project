@@ -219,6 +219,7 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
     func goToMenu(sender: GameScene) {
         if let view = self.view as? SKView{
             addBanner()
+            shakeDel = nil
             let scene = MenuScene(size: view.frame.size)
             scene.menuDelegate = self
             scene.scaleMode = .aspectFill
