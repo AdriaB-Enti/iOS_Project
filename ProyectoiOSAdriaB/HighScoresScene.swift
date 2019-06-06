@@ -36,14 +36,13 @@ class HighScoresScene: SKScene, ButtonDelegate {
             label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
         }
         
-        
         self.backgroundColor = UIColor(named: "myBlue")!
         
         backButton.fillColor = UIColor(named: "myOrange")!
         backButton.setTextColor(color: .black)
         backButton.position = CGPoint(x: (view.frame.width/2.0) - backButton.frame.width/2.0, y: (view.frame.height / 3.0) - backButton.frame.height/2.0)
         backButton.setText(text: NSLocalizedString("BackButton", comment: "back button"))
-        backButton.setTextSize(newSize: 22)
+        backButton.setTextSize(newSize: 18)
         backButton.delegate = self
         backButton.isUserInteractionEnabled = true
         addChild(backButton)

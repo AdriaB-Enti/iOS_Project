@@ -171,6 +171,15 @@ GADBannerViewDelegate, LoginDelegate, HighScoresDelegate {
         }
     }
     
+    func goToScores(sender: MenuScene){
+        if let view = self.view as? SKView{
+            let scene = HighScoresScene(size: view.frame.size)
+            scene.scoresDelegate = self
+            scene.scaleMode = .aspectFill
+            view.presentScene(scene, transition: .reveal(with: .left, duration: 0.4))
+        }
+    }
+    
     func goToGame(sender: MenuScene, level:Level) {
         if let view = self.view as? SKView{
             deleteBanner()

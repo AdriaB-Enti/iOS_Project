@@ -12,6 +12,7 @@ import GameplayKit
 protocol MenuSceneDelegate: class {
     func goToAbout(sender: MenuScene)
     func goToGame(sender: MenuScene, level:Level)
+    func goToScores(sender: MenuScene)
 }
 
 class MenuScene: SKScene, ButtonDelegate {
@@ -25,9 +26,7 @@ class MenuScene: SKScene, ButtonDelegate {
     //MENU BUTTONS
     private var startButton = Button(rect: CGRect(x: 0, y: 0, width: 300, height: 100), cornerRadius: 15)
     
-    //private var optionsButton = Button(rect: CGRect(x: 0, y: 0, width: 70, height: 70), cornerRadius: 30)
-
-    private var aboutButton = Button(rect: CGRect(x: 0, y: 0, width: 280, height: 80), cornerRadius: 15)
+    private var scoresButton = Button(rect: CGRect(x: 0, y: 0, width: 255, height: 76), cornerRadius: 15)
     let easyButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let mediumButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
     let hardButton = Button(rect: CGRect(x: 0, y: 0, width: 160, height: 67), cornerRadius: 15)
@@ -57,39 +56,17 @@ class MenuScene: SKScene, ButtonDelegate {
         addChild(audioButton)
         
         
-        //print("preferences: \(Preferences().getMusicEnabled())")
-        //Preferences().setMusicEnabled(isEnabled: true)
-        //print("CHANGED PREF: \(Preferences().getMusicEnabled())")
-        //print("TEST TEST: \(Preferences().test())")
+        scoresButton.fillColor = UIColor(named: "myOrange")!
+        scoresButton.position = CGPoint(x: (view.frame.width/2.0) - scoresButton.frame.width/2.0, y: (view.frame.height / 5.5) - scoresButton.frame.height/2.0)
+        scoresButton.isUserInteractionEnabled = true
+        scoresButton.delegate = self
+        scoresButton.setText(text: NSLocalizedString("HighScores", comment: "scores button"))
+        scoresButton.setTextSize(newSize: 18)
+        scoresButton.setTextColor(color: .black)
+        addChild(scoresButton)
         
-        
-        
-        /*optionsButton.fillColor = UIColor(named: "myGray")!
-        optionsButton.position = CGPoint(x: (8.75*view.frame.width/10.0) - optionsButton.frame.width/2.0, y: (9.5*view.frame.height / 10.0) - optionsButton.frame.height/2.0)
-        optionsButton.isUserInteractionEnabled = true
-        optionsButton.delegate = self
-        optionsButton.setTextColor(color: .black)
-        addChild(optionsButton)*/
-        
-        aboutButton.fillColor = UIColor(named: "myOrange")!
-        aboutButton.position = CGPoint(x: (view.frame.width/2.0) - aboutButton.frame.width/2.0, y: (view.frame.height / 5.5) - aboutButton.frame.height/2.0)
-        aboutButton.isUserInteractionEnabled = true
-        aboutButton.delegate = self
-        aboutButton.setText(text: NSLocalizedString("AboutButton", comment: "about button"))
-        aboutButton.setTextColor(color: .black)
-        addChild(aboutButton)
-        
-        /*logo =  SKSpriteNode(imageNamed: "testicon")
-        if var logo = self.logo{
-            logo.position = CGPoint(x: view.frame.width/2,y: view.frame.height/2)
-            addChild(logo)
-        }*/
-        
-        // Get label node from scene and store it for use later
         
         self.label = SKLabelNode(text:"Magic Memorizer")
-                
-        //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
             //label.alpha = 0.0
             addChild(label)
@@ -99,7 +76,6 @@ class MenuScene: SKScene, ButtonDelegate {
             label.fontSize = 35
             label.position = CGPoint(x: view.frame.width/2.0, y: 5.2 * view.frame.height / 7.0)
         }
-        
         
         
         easyButton.position = CGPoint(x: view.frame.width * 0.8, y: view.frame.height * 0.6)
@@ -173,7 +149,6 @@ class MenuScene: SKScene, ButtonDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
         
         
     }
@@ -215,8 +190,8 @@ class MenuScene: SKScene, ButtonDelegate {
             
         }*/
         
-        if(sender == aboutButton){
-            menuDelegate?.goToAbout(sender: self)
+        if(sender == scoresButton){
+            menuDelegate?.goToScores(sender: self)
         }
         
         if(sender == easyButton){
